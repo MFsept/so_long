@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/24 19:14:35 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:53:38 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int main(void)
     int     fd;
     char    **map;
     t_data  m;
-    t_data  img;
+    void  *img;
+    t_data test;
+    int width, height;
 
     fd = open("map.ber", O_RDONLY);
     if (fd < 0)
@@ -42,18 +44,22 @@ int main(void)
         mlx_destroy_display(m.mlx);
         return (free(m.mlx), 1);
     }
-    img.img = mlx_new_image(m.mlx, HEIGHT_IMAGE, WIDTH_IMAGE);
-    if (!img.img)
+    test.img = mlx_new_image(m.mlx, HEIGHT_IMAGE, WIDTH_IMAGE);
+    if (!test.img)
     {
         mlx_destroy_display(m.mlx);
         return (free(m.mlx), 1);
     }
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-    
-    mlx_pixel(&img, HEIGHT_IMAGE / 2, WIDTH_IMAGE / 2, 0xff0000);
+    test.addr = mlx_get_data_addr(test.img, &test.bits_per_pixel, &test.line_length,
+								&test.endian);
     map_fill(map);
-    mlx_put_image_to_window(m.mlx, m.window, img.img, 0, 0);
+    img = mlx_xpm_file_to_image(m.mlx, "map.xpm", &width, &height);
+    if (!img)
+    {
+        ft_putstr_fd("Erreur lors du chargement de l'image\n", 2);
+        return (1);
+    }
+    mlx_put_image_to_window(m.mlx, m.window, img, 0, 0);
     
 
     mlx_hook(m.window, 2, 1L<<0, close_window, &m);
@@ -63,7 +69,7 @@ int main(void)
     mlx_destroy_window(m.mlx, m.window);
     mlx_destroy_display(m.mlx);
     free(m.mlx);
-    free_tab(map);
+    // free_tab(map);
     return (0);
 }
 

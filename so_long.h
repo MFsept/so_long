@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/24 19:14:28 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:54:18 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 #include "minilibx-linux/mlx.h"
 #include <fcntl.h>
 
-#define HEIGHT_WINDOW 2560
-#define WIDTH_WINDOW 1440
+#define HEIGHT_WINDOW 1920
+#define WIDTH_WINDOW 1199
 
-#define HEIGHT_IMAGE 2560
-#define WIDTH_IMAGE 1440
+#define HEIGHT_IMAGE 1920
+#define WIDTH_IMAGE 1199
 
 typedef struct	s_data {
 	void	*img;

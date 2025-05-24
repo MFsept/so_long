@@ -1,6 +1,13 @@
 NAME = so_long
 
-SRC = so_long.c
+SRC = so_long.c \
+		libft/ft_split.c \
+		map.c \
+		libft/ft_putstr_fd.c \
+		libft/gnl/get_next_line.c \
+		libft/ft_strlen.c \
+		libft/ft_putchar_fd.c \
+		libft/gnl/get_next_line_utils.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -10,7 +17,8 @@ MLX_EX = minilibx-linux/libmlx.a
 
 INC = so_long.h \
     libft/libft.h \
-    libft/printf/ft_printf.h
+    libft/printf/ft_printf.h \
+	libft/gnl/get_next_line.h 
 
 CC = cc
 
