@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/24 21:54:18 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:45:57 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,7 @@ char    **create_map(int file);
 void map_fill(char **map);
 int nb_lines(int file);
 int check_char(char **tab);
+
+
+void	free_tab(char **tab);
 #endif

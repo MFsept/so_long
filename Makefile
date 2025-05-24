@@ -1,13 +1,13 @@
 NAME = so_long
 
-SRC = so_long.c \
-		libft/ft_split.c \
-		map.c \
-		libft/ft_putstr_fd.c \
-		libft/gnl/get_next_line.c \
-		libft/ft_strlen.c \
-		libft/ft_putchar_fd.c \
-		libft/gnl/get_next_line_utils.c 
+SRC = src/so_long.c \
+      src/map.c \
+      libft/ft_split.c \
+      libft/ft_putstr_fd.c \
+      libft/ft_strlen.c \
+      libft/ft_putchar_fd.c \
+      libft/gnl/get_next_line.c \
+      libft/gnl/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 
