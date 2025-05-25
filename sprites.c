@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 12:18:13 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 12:36:47 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhitetop, x * TILE, y * TILE);
     }
-    else if(y == nb_lines("map.ber"))
+    else if(y == Y_MAX)
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallbluebottom, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhitebottom, x * TILE, y * TILE);
     }
-    else if (x == 0 && y != 0 && y != nb_lines("map.ber"))
+    else if (x == 0 && y != 0 && y != Y_MAX)
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueleft, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteleft, x * TILE, y * TILE);
     }
-    else if (x == X_MAX && y != 0 && y != nb_lines("map.ber"))
+    else if (x == X_MAX && y != 0 && y != Y_MAX)
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueright, x * TILE, y * TILE);
@@ -109,14 +109,49 @@ void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
 }
 
 // Affichage des autres éléments
-void put_player(t_data *mlx, t_sprites *sprites, int x, int y)
+void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
 {
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->player, x * TILE, y * TILE);
+    mif (game->player_dir == 0) // bas
+    {
+        if (game->player_anim_frame == 0)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottommid, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottomleft, x * TILE, y * TILE);
+        else
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottomright, x * TILE, y * TILE);
+    }
+    if (game->player_dir == 1) // left
+    {
+        if (game->player_anim_frame == 0)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftmid, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftleft, x * TILE, y * TILE);
+        else
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftright, x * TILE, y * TILE);
+    }
+    if (game->player_dir == 2) // right
+    {
+        if (game->player_anim_frame == 0)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightmid, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightleft, x * TILE, y * TILE);
+        else
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightright, x * TILE, y * TILE);
+    }
+    else (game->player_dir == 3) // top
+    {
+        if (game->player_anim_frame == 0)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopmid, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopleft, x * TILE, y * TILE);
+        else
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopright, x * TILE, y * TILE);
+    }
 }
 
 void put_collectible(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->collectible, x * TILE, y * TILE);
+    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->cheese, x * TILE, y * TILE);
 }
 
 void put_exit(t_data *mlx, t_sprites *sprites, int x, int y)
@@ -124,12 +159,26 @@ void put_exit(t_data *mlx, t_sprites *sprites, int x, int y)
     mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->exit, x * TILE, y * TILE);
 }
 
-void put_enemy(t_data *mlx, t_sprites *sprites, int x, int y)
+void put_enemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
 {
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy, x * TILE, y * TILE);
+    if (game -> enemy_anim_frame == 0)
+        mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy1, x * TILE, y * TILE);
+    else if (game -> enemy_anim_frame == 1)
+        mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy2, x * TILE, y * TILE);
+    else if (game -> enemy_anim_frame == 2)
+        mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy3, x * TILE, y * TILE);
 }
 
-void put_trap(t_data *mlx, t_sprites *sprites, int x, int y)
+
+
+void put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->trap, x * TILE, y * TILE);
+    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->trapopen, x * TILE, y * TILE);
+    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->fakecheese, x * TILE, y * TILE);
+}
+
+void put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y)
+{
+    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->trapclose, x * TILE, y * TILE);
+    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->fakecheese, x * TILE, y * TILE);
 }
