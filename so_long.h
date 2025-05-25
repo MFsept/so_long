@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/24 22:45:57 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 10:40:35 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 #include "minilibx-linux/mlx.h"
 #include <fcntl.h>
 
-#define HEIGHT_WINDOW 1920
-#define WIDTH_WINDOW 1199
-
-#define HEIGHT_IMAGE 1920
-#define WIDTH_IMAGE 1199
+#define HEIGHT_WINDOW 1500
+#define WIDTH_WINDOW 939
+#define TILE 32
+#define HEIGHT_IMAGE 1500
+#define WIDTH_IMAGE 939
 
 typedef struct	s_data {
 	void	*img;
@@ -45,8 +45,20 @@ typedef struct s_map
     int     moves;
 }   t_map;
 
+typedef struct s_sprites
+{
+    void    *wall;
+    void    *floor;
+    void    *player;
+    void    *collectible;
+    void    *exit;
+    void    *enemy;
+}   t_sprites;
+
 void    mlx_pixel(t_data *data, int x, int y, int color);
-int close_window(int keycode, t_data *vars);
+int close_window(t_data *vars);
+int key_hook(int keycode, t_data *vars);
+
 
 
 
@@ -58,4 +70,5 @@ int check_char(char **tab);
 
 
 void	free_tab(char **tab);
+void    close_free_all(t_data m, char **map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/24 22:47:23 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 10:40:27 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(void)
     test.addr = mlx_get_data_addr(test.img, &test.bits_per_pixel, &test.line_length,
 								&test.endian);
     map_fill(map);
-    img = mlx_xpm_file_to_image(m.mlx, "map.xpm", &width, &height);
+    img = mlx_xpm_file_to_image(m.mlx, "assets/utils/map.xpm", &width, &height);
     if (!img)
     {
         ft_putstr_fd("Error during loading of the map\n", 2);
@@ -62,14 +62,11 @@ int main(void)
     mlx_put_image_to_window(m.mlx, m.window, img, 0, 0);
     
 
-    mlx_hook(m.window, 2, 1L<<0, close_window, &m);
-    mlx_hook(m.window, 4, 1L<<2, close_window, &m);
+    mlx_hook(m.window, 2, 1L<<0, key_hook, &m);
+    mlx_hook(m.window, 17, 0, close_window, &m);
 
     mlx_loop(m.mlx);
-    mlx_destroy_window(m.mlx, m.window);
-    mlx_destroy_display(m.mlx);
-    free(m.mlx);
-    free_tab(map);
+    close_free_all(m, map);
     return (0);
 }
 
@@ -81,17 +78,24 @@ void    mlx_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int close_window(int keycode, t_data *vars)
+
+int key_hook(int keycode, t_data *vars)
 {
     if (keycode == 65307)
-    {
-        mlx_destroy_window(vars->mlx, vars->window);
-        exit(EXIT_SUCCESS);
-    }
-    else if (keycode == 1)
-    {
-        mlx_destroy_window(vars->mlx, vars->window);
-        exit(EXIT_SUCCESS);
-    }
+        close_window(vars);
+    return (0);
+}
+int close_window(t_data *vars)
+{
+    mlx_destroy_window(vars->mlx, vars->window);
+    exit(EXIT_SUCCESS);
     return(0);
+}
+
+void    close_free_all(t_data m, char **map)
+{
+    mlx_destroy_window(m.mlx, m.window);
+    mlx_destroy_display(m.mlx);
+    free(m.mlx);
+    free_tab(map);
 }

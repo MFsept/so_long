@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/24 22:47:30 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 10:31:51 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,31 +91,31 @@ int check_char(char **tab)
     }
     return (1);
 }
-// void	map_draw(char **map, t_data *mlx, t_img *sprites)
-// {
-//     int	x;
-//     int	y;
+void	map_draw(char **map, t_data *mlx, t_sprites *sprites)
+{
+    int	x;
+    int	y;
 
-//     y = 0;
-//     while (map[y])
-//     {
-//         x = 0;
-//         while (map[y][x])
-//         {
-//             if (map[y][x] == '1')
-//                 mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wall, x * TILE, y * TILE);
-//             else if (map[y][x] == '0')
-//                 mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floor, x * TILE, y * TILE);
-//             else if (map[y][x] == 'P')
-//                 mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->player, x * TILE, y * TILE);
-//             else if (map[y][x] == 'C')
-//                 mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->collectible, x * TILE, y * TILE);
-//             else if (map[y][x] == 'E')
-//                 mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->exit, x * TILE, y * TILE);
-//             else if (map[y][x] == 'X')
-//                 mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy, x * TILE, y * TILE);
-//             x++;
-//         }
-//         y++;
-//     }
-// }
+    y = 0;
+    while (map[y])
+    {
+        x = 0;
+        while (map[y][x])
+        {
+            if (map[y][x] == '1')
+                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wall, x * TILE, y * TILE);
+            else if (map[y][x] == '0')
+                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floor, x * TILE, y * TILE);
+            else if (map[y][x] == 'P')
+                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->player, x * TILE, y * TILE);
+            else if (map[y][x] == 'C')
+                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->collectible, x * TILE, y * TILE);
+            else if (map[y][x] == 'E')
+                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->exit, x * TILE, y * TILE);
+            else if (map[y][x] == 'X')
+                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy, x * TILE, y * TILE);
+            x++;
+        }
+        y++;
+    }
+}
