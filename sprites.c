@@ -6,18 +6,20 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 13:45:31 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:11:42 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
+
+#include <stdio.h>
 
 void *load_sprite(void *mlx, char *path)
 {
     int w, h;
     void *img = mlx_xpm_file_to_image(mlx, path, &w, &h);
     if (!img)
-        ft_putstr_fd("Erreur chargement sprite\n", 2);
+        printf("Erreur chargement sprite : %s\n", path);
     return img;
 }
 
@@ -29,8 +31,8 @@ void load_player(t_data *m, t_sprites *sprites)
     sprites->playerleftleft = load_sprite(m->mlx, "assets/jerry_left/leftleft3.xpm");
     sprites->playerleftmid = load_sprite(m->mlx, "assets/jerry_left/leftmid.xpm");
     sprites->playerleftright = load_sprite(m->mlx, "assets/jerry_left/leftright3.xpm");
-    sprites->playerrightleft = load_sprite(m->mlx, "assets/wall/jerry_right/rightleft3.xpm");
-    sprites->playerrightmid = load_sprite(m->mlx, "assets/wall/jerry_right/rightmid3.xpm");
+    sprites->playerrightleft = load_sprite(m->mlx, "assets/jerry_right/rightleft3.xpm");
+    sprites->playerrightmid = load_sprite(m->mlx, "assets/jerry_right/rightmid.xpm");
     sprites->playerrightright = load_sprite(m->mlx, "assets/jerry_right/rightright3.xpm");
     sprites->playertopright = load_sprite(m->mlx, "assets/jerry_top/topright3.xpm");
     sprites->playertopmid = load_sprite(m->mlx, "assets/jerry_top/topmid.xpm");

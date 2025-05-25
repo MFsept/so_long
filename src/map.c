@@ -6,26 +6,90 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 13:33:24 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:39:55 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-char    **create_map(int file)
+// char    **create_map(int file)
+// {
+//     char    **map;
+//     char    *line;
+//     int i;
+
+//     i = 0;
+//     map = malloc(sizeof(char *) * (nb_lines(file) + 1));
+//     if (!map)
+//         return (NULL);
+//     while((line = get_next_line(file)) != NULL)
+//         map[i++] = line;
+//     map[i] = NULL;
+//     return (map);
+// }
+
+static void	free_list(t_list *lst)
 {
+    t_list *tmp;
+    while (lst)
+    {
+        tmp = lst->next;
+        free(lst->line);
+        free(lst);
+        lst = tmp;
+    }
+}
+
+char **create_map(int file)
+{
+    t_list  *lst = NULL, *last = NULL, *tmp;
     char    **map;
     char    *line;
-    int i;
+    int     size = 0, i = 0;
 
-    i = 0;
-    map = malloc(sizeof(char *) * (nb_lines(file) + 1));
+    // Lecture du fichier et stockage dans une liste chaînée
+    while ((line = get_next_line(file)) != NULL)
+    {
+        tmp = malloc(sizeof(t_list));
+        if (!tmp)
+        {
+            free(line);
+            free_list(lst);
+            return NULL;
+        }
+        tmp->line = line;
+        tmp->next = NULL;
+        if (!lst)
+            lst = tmp;
+        else
+            last->next = tmp;
+        last = tmp;
+        size++;
+    }
+    // Allocation du tableau final
+    map = malloc(sizeof(char *) * (size + 1));
     if (!map)
-        return (NULL);
-    while((line = get_next_line(file)) != NULL)
-        map[i++] = line;
+    {
+        free_list(lst);
+        return NULL;
+    }
+    // Remplissage du tableau
+    tmp = lst;
+    while (tmp)
+    {
+        map[i++] = tmp->line;
+        tmp = tmp->next;
+    }
     map[i] = NULL;
-    return (map);
+    // Libération de la liste (mais pas des lignes, elles sont dans map)
+    tmp = lst;
+    while (tmp)
+    {
+        t_list *next = tmp->next;
+        free(tmp);
+        tmp = next;
+    }
+    return map;
 }
 
 void map_fill(char **map)
@@ -102,10 +166,11 @@ void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
         x = 0;
         while (map[y][x])
         {
+            put_floor(mlx, sprites, x, y);
             if (map[y][x] == '1')
                 put_wall(mlx, sprites, x, y);
-            else if (map[y][x] == '0')
-                put_floor(mlx, sprites, x, y);
+            // else if (map[y][x] == '0')
+            //    put_floor(mlx, sprites, x, y);
             else if (map[y][x] == 'P')
                 put_player(mlx, sprites,game, x, y);
             else if (map[y][x] == 'C')

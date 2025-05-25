@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 13:45:02 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:40:58 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@
 
 # define TILE 32
 #define WIDTH_WINDOW (13 * TILE)
-#define HEIGHT_WINDOW (6 * TILE)
-#define WIDTH_WINDOW (13 * TILE)
-#define HEIGHT_WINDOW (6 * TILE)
-# define X_MAX 11
-# define Y_MAX 5
+#define HEIGHT_WINDOW (5 * TILE)
+# define X_MAX 12
+# define Y_MAX 4
+
 
 typedef struct s_data
 {
@@ -103,7 +102,8 @@ int			check_char(char **tab);
 void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game);
 
 void		free_tab(char **tab);
-void		close_free_all(t_data m, char **map);
+void    close_free_all(t_data m, char **map);
+void destroy_sprites(t_data *m, t_sprites *sprites);
 
 
 //sprites 
@@ -119,4 +119,5 @@ void put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
 void put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
+
 #endif

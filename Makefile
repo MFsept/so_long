@@ -2,7 +2,7 @@ NAME = so_long
 
 SRC = src/so_long.c \
       src/map.c \
-      src/sprites.c \
+      sprites.c \
       libft/ft_split.c \
       libft/ft_putstr_fd.c \
       libft/ft_strlen.c \

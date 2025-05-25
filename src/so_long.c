@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 13:47:11 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:36:13 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int main(void)
         mlx_destroy_display(m.mlx);
         return (free(m.mlx), 1);
     }
-
     // Chargement des sprites
     load_player(&m, &sprites);
     load_map(&m, &sprites);
@@ -66,7 +65,7 @@ int main(void)
 
     // mlx_string_put
     mlx_loop(m.mlx);
-
+    destroy_sprites(&m, &sprites);
     close_free_all(m, map);
     return (0);
 }
@@ -92,7 +91,41 @@ void    close_free_all(t_data m, char **map)
 {
     mlx_destroy_window(m.mlx, m.window);
     mlx_destroy_display(m.mlx);
-    // free(m.mlx);
+    free(m.mlx);
     free_tab(map);
 }
 
+void destroy_sprites(t_data *m, t_sprites *sprites)
+{
+    mlx_destroy_image(m->mlx, sprites->playerbottomleft);
+    mlx_destroy_image(m->mlx, sprites->playerbottommid);
+    mlx_destroy_image(m->mlx, sprites->playerbottomright);
+    mlx_destroy_image(m->mlx, sprites->playerleftleft);
+    mlx_destroy_image(m->mlx, sprites->playerleftmid);
+    mlx_destroy_image(m->mlx, sprites->playerleftright);
+    mlx_destroy_image(m->mlx, sprites->playerrightleft);
+    mlx_destroy_image(m->mlx, sprites->playerrightmid);
+    mlx_destroy_image(m->mlx, sprites->playerrightright);
+    mlx_destroy_image(m->mlx, sprites->playertopright);
+    mlx_destroy_image(m->mlx, sprites->playertopmid);
+    mlx_destroy_image(m->mlx, sprites->playertopleft);
+    mlx_destroy_image(m->mlx, sprites->wallbluebottom);
+    mlx_destroy_image(m->mlx, sprites->wallblueleft);
+    mlx_destroy_image(m->mlx, sprites->wallblueright);
+    mlx_destroy_image(m->mlx, sprites->wallbluetop);
+    mlx_destroy_image(m->mlx, sprites->wallwhitebottom);
+    mlx_destroy_image(m->mlx, sprites->wallwhiteleft);
+    mlx_destroy_image(m->mlx, sprites->wallwhiteright);
+    mlx_destroy_image(m->mlx, sprites->wallwhitetop);
+    mlx_destroy_image(m->mlx, sprites->floorblue);
+    mlx_destroy_image(m->mlx, sprites->floorwhite);
+    mlx_destroy_image(m->mlx, sprites->cheese);
+    mlx_destroy_image(m->mlx, sprites->fakecheese);
+    mlx_destroy_image(m->mlx, sprites->exit);
+    mlx_destroy_image(m->mlx, sprites->enemy1);
+    mlx_destroy_image(m->mlx, sprites->enemy2);
+    mlx_destroy_image(m->mlx, sprites->enemy3);
+    mlx_destroy_image(m->mlx, sprites->jerrydeath);
+    mlx_destroy_image(m->mlx, sprites->trapopen);
+    mlx_destroy_image(m->mlx, sprites->trapclose);
+}
