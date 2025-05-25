@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 12:36:47 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:34:02 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void load_utils(t_data *m, t_sprites *sprites)
     sprites->enemy1 = load_sprite(m->mlx, "assets/tom/tom.xpm");
     sprites->enemy2 = load_sprite(m->mlx, "assets/tom/tom1.xpm");
     sprites->enemy3 = load_sprite(m->mlx, "assets/tom/tom2.xpm");
-    sprites->trapopen = load_sprite(m->mlx, "assets/utils/jerrydeath.xpm");
+    sprites->jerrydeath = load_sprite(m->mlx, "assets/utils/jerrydeath.xpm");
     sprites->trapopen = load_sprite(m->mlx, "assets/utils/trapopen.xpm");
     sprites->trapclose = load_sprite(m->mlx, "assets/utils/trapclose.xpm");
 }
@@ -111,7 +111,7 @@ void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
 // Affichage des autres éléments
 void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
 {
-    mif (game->player_dir == 0) // bas
+    if (game->player_dir == 0) // bas
     {
         if (game->player_anim_frame == 0)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottommid, x * TILE, y * TILE);
@@ -138,7 +138,7 @@ void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightright, x * TILE, y * TILE);
     }
-    else (game->player_dir == 3) // top
+    else if (game->player_dir == 3) // top
     {
         if (game->player_anim_frame == 0)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopmid, x * TILE, y * TILE);
@@ -159,7 +159,7 @@ void put_exit(t_data *mlx, t_sprites *sprites, int x, int y)
     mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->exit, x * TILE, y * TILE);
 }
 
-void put_enemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
+void put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
 {
     if (game -> enemy_anim_frame == 0)
         mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy1, x * TILE, y * TILE);
@@ -173,12 +173,11 @@ void put_enemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
 
 void put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->trapopen, x * TILE, y * TILE);
     mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->fakecheese, x * TILE, y * TILE);
+    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->trapopen, x * TILE, y * TILE);
 }
 
 void put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y)
 {
     mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->trapclose, x * TILE, y * TILE);
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->fakecheese, x * TILE, y * TILE);
 }

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 12:38:05 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:33:07 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define HEIGHT_IMAGE 1500
 # define WIDTH_IMAGE 939
 
-# define X_MAX 12
-# define Y_MAX 6
+# define X_MAX 11
+# define Y_MAX 5
 
 typedef struct s_data
 {
@@ -88,7 +88,7 @@ typedef struct s_game
 {
 	int player_anim_frame; // 0, 1, 2
 	int player_dir;        // 0 = bas, 1 = gauche, 2 = droite, 3 = haut
-	int enemy_anim_frame
+	int enemy_anim_frame;
     // ...autres champs...
 }			t_game;
 
@@ -101,6 +101,7 @@ char		**create_map(int file);
 void		map_fill(char **map);
 int			nb_lines(int file);
 int			check_char(char **tab);
+void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game);
 
 void		free_tab(char **tab);
 void		close_free_all(t_data m, char **map);
@@ -116,7 +117,7 @@ void put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
 void put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
-void put_enemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
+void put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
 void put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
 #endif

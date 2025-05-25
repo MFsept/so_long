@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 10:31:51 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:33:24 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char    **create_map(int file)
     int i;
 
     i = 0;
-    map = malloc(sizeof(char *) * nb_lines(file) + 1);
+    map = malloc(sizeof(char *) * (nb_lines(file) + 1));
     if (!map)
         return (NULL);
     while((line = get_next_line(file)) != NULL)
@@ -91,7 +91,7 @@ int check_char(char **tab)
     }
     return (1);
 }
-void	map_draw(char **map, t_data *mlx, t_sprites *sprites)
+void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
 {
     int	x;
     int	y;
@@ -103,17 +103,21 @@ void	map_draw(char **map, t_data *mlx, t_sprites *sprites)
         while (map[y][x])
         {
             if (map[y][x] == '1')
-                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wall, x * TILE, y * TILE);
+                put_wall(mlx, sprites, x, y);
             else if (map[y][x] == '0')
-                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floor, x * TILE, y * TILE);
+                put_floor(mlx, sprites, x, y);
             else if (map[y][x] == 'P')
-                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->player, x * TILE, y * TILE);
+                put_player(mlx, sprites,game, x, y);
             else if (map[y][x] == 'C')
-                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->collectible, x * TILE, y * TILE);
+                put_collectible(mlx, sprites, x, y);
             else if (map[y][x] == 'E')
-                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->exit, x * TILE, y * TILE);
+                put_exit(mlx, sprites, x, y);
             else if (map[y][x] == 'X')
-                mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->enemy, x * TILE, y * TILE);
+                put_ennemy(mlx, sprites, game, x, y);
+            else if (map[y][x] == 'T')
+                put_trapopen(mlx, sprites, x, y);
+            else if (map[y][x] == 't')
+                put_trapclose(mlx, sprites, x, y);
             x++;
         }
         y++;
