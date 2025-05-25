@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 12:05:00 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 12:18:13 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,6 @@ void *load_sprite(void *mlx, char *path)
     if (!img)
         ft_putstr_fd("Erreur chargement sprite\n", 2);
     return img;
-}
-
-void load_all_sprites(t_data *m, t_sprites *sprites)
-{
-    sprites->wallbluebottom = load_sprite(m->mlx, "assets/wall/wallbluebottom.xpm");
-    sprites->wallblueleft = load_sprite(m->mlx, "assets/wall/wallblueleft.xpm");
-    sprites->wallblueright = load_sprite(m->mlx, "assets/wall/wallblueright.xpm");
-    sprites->wallbluetop = load_sprite(m->mlx, "assets/wall/wallbluetop.xpm");
-    sprites->wallwhitebottom = load_sprite(m->mlx, "assets/wall/wallwhitebottom.xpm");
-    sprites->wallwhiteleft = load_sprite(m->mlx, "assets/wall/wallwhiteleft.xpm");
-    sprites->wallwhiteright = load_sprite(m->mlx, "assets/wall/wallwhiteright.xpm");
-    sprites->wallwhitetop = load_sprite(m->mlx, "assets/wall/wallwhitetop.xpm");
-    sprites->floorblue = load_sprite(m->mlx, "assets/floor/floorblue.xpm");
-    sprites->floorwhite = load_sprite(m->mlx, "assets/floor/floorwhite.xpm");
-    sprites->collectible = load_sprite(m->mlx, "assets/cheese/cheese.xpm");
-    sprites->exit = load_sprite(m->mlx, "assets/utils/doorleft.xpm");
-    sprites->trap = load_sprite(m->mlx, "assets/utils/trapopen.xpm");
-    sprites->enemy = load_sprite(m->mlx, "assets/tom/tom.xpm");
-
 }
 
 void load_player(t_data *m, t_sprites *sprites)
@@ -69,32 +50,20 @@ void load_map(t_data *m, t_sprites *sprites)
     sprites->wallwhitetop = load_sprite(m->mlx, "assets/wall/wallwhitetop.xpm");
     sprites->floorblue = load_sprite(m->mlx, "assets/floor/floorblue.xpm");
     sprites->floorwhite = load_sprite(m->mlx, "assets/floor/floorwhite.xpm");
-    sprites->player = load_sprite(m->mlx, "assets/jerry_bottom/bottomleft1.xpm");
-    sprites->collectible = load_sprite(m->mlx, "assets/cheese/cheese.xpm");
-    sprites->exit = load_sprite(m->mlx, "assets/utils/doorleft.xpm");
-    sprites->trap = load_sprite(m->mlx, "assets/utils/trapopen.xpm");
-    sprites->enemy = load_sprite(m->mlx, "assets/tom/tom.xpm");
 
 }
 
 void load_utils(t_data *m, t_sprites *sprites)
 {
-    sprites->wallbluebottom = load_sprite(m->mlx, "assets/wall/wallbluebottom.xpm");
-    sprites->wallblueleft = load_sprite(m->mlx, "assets/wall/wallblueleft.xpm");
-    sprites->wallblueright = load_sprite(m->mlx, "assets/wall/wallblueright.xpm");
-    sprites->wallbluetop = load_sprite(m->mlx, "assets/wall/wallbluetop.xpm");
-    sprites->wallwhitebottom = load_sprite(m->mlx, "assets/wall/wallwhitebottom.xpm");
-    sprites->wallwhiteleft = load_sprite(m->mlx, "assets/wall/wallwhiteleft.xpm");
-    sprites->wallwhiteright = load_sprite(m->mlx, "assets/wall/wallwhiteright.xpm");
-    sprites->wallwhitetop = load_sprite(m->mlx, "assets/wall/wallwhitetop.xpm");
-    sprites->floorblue = load_sprite(m->mlx, "assets/floor/floorblue.xpm");
-    sprites->floorwhite = load_sprite(m->mlx, "assets/floor/floorwhite.xpm");
-    sprites->player = load_sprite(m->mlx, "assets/jerry_bottom/bottomleft1.xpm");
-    sprites->collectible = load_sprite(m->mlx, "assets/cheese/cheese.xpm");
+    sprites->cheese = load_sprite(m->mlx, "assets/cheese/cheese.xpm");
+    sprites->fakecheese = load_sprite(m->mlx, "assets/cheese/fakecheese.xpm");
     sprites->exit = load_sprite(m->mlx, "assets/utils/doorleft.xpm");
-    sprites->trap = load_sprite(m->mlx, "assets/utils/trapopen.xpm");
-    sprites->enemy = load_sprite(m->mlx, "assets/tom/tom.xpm");
-
+    sprites->enemy1 = load_sprite(m->mlx, "assets/tom/tom.xpm");
+    sprites->enemy2 = load_sprite(m->mlx, "assets/tom/tom1.xpm");
+    sprites->enemy3 = load_sprite(m->mlx, "assets/tom/tom2.xpm");
+    sprites->trapopen = load_sprite(m->mlx, "assets/utils/jerrydeath.xpm");
+    sprites->trapopen = load_sprite(m->mlx, "assets/utils/trapopen.xpm");
+    sprites->trapclose = load_sprite(m->mlx, "assets/utils/trapclose.xpm");
 }
 
 // Affichage d'une case mur avec alternance

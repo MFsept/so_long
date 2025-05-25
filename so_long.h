@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 12:05:07 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 12:16:57 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,15 @@ typedef struct s_sprites
     void    *playertopright;
     void    *playertopmid;
     void    *playertopleft;
-    void    *collectible;
+    void    *cheese;
+    void    *fakecheese;
     void    *exit;
-    void    *enemy;
-    void    *trap;
+    void    *enemy1;
+    void    *enemy2;
+    void    *enemy3;
+    void    *jerrydeath;
+    void    *trapopen;
+    void    *trapclose;
 }   t_sprites;
 
 
