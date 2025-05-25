@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 15:36:13 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 21:43:48 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(void)
         ft_putstr_fd("Problem when creating the map\n", 2);
         return (1);
     }
-
+    m.map = map;
     m.mlx = mlx_init();
     if (!m.mlx)
         return (1);
@@ -80,6 +80,60 @@ int key_hook(int keycode, t_data *vars)
         close_window(vars);
     return (0);
 }
+
+// int key_hook(int keycode, t_data *vars)
+// {
+//     char **map = vars->map;
+//     int x = 0, y = 0;
+//     int found = 0;
+
+//     // Trouve la position du joueur (P) avec des while
+//     y = 0;
+//     while (map[y] && !found)
+//     {
+//         x = 0;
+//         while (map[y][x])
+//         {
+//             if (map[y][x] == 'P')
+//             {
+//                 found = 1;
+//                 break;
+//             }
+//             x++;
+//         }
+//         if (!found)
+//             y++;
+//     }
+//     if (!found)
+//         return (0);
+
+//     int nx = x, ny = y;
+//     if (keycode == 65307) // echap
+//         close_window(vars);
+//     else if (keycode == 119) // w
+//         ny--;
+//     else if (keycode == 115) // s
+//         ny++;
+//     else if (keycode == 97) // a
+//         nx--;
+//     else if (keycode == 100) // d
+//         nx++;
+//     else
+//         return (0); // Ignore les autres touches
+
+//     // Vérifie que la case cible est dans la map
+//     if (ny < 0 || nx < 0 || !map[ny] || !map[ny][nx])
+//         return (0);
+
+//     // Vérifie que la case cible n'est pas un mur
+//     if (map[ny][nx] != '1')
+//     {
+//         map[y][x] = '0';
+//         map[ny][nx] = 'P';
+//         map_draw(map, vars, &vars->sprites, &vars->game);
+//     }
+//     return (0);
+// }
 int close_window(t_data *vars)
 {
     mlx_destroy_window(vars->mlx, vars->window);

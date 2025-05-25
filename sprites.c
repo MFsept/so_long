@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 15:11:42 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 21:05:35 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteright, x * TILE, y * TILE);
     }
-    else
-    mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueleft, x * TILE, y * TILE);
 }
 
 // Affichage d'une case sol avec alternance

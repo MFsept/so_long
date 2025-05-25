@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 15:40:58 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 21:40:28 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,11 @@
 # include <fcntl.h>
 
 # define TILE 32
-#define WIDTH_WINDOW (13 * TILE)
-#define HEIGHT_WINDOW (5 * TILE)
-# define X_MAX 12
-# define Y_MAX 4
+#define WIDTH_WINDOW 20 * TILE
+#define HEIGHT_WINDOW 12 * TILE
+# define X_MAX 19
+# define Y_MAX 11
 
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx;
-	void	*window;
-}			t_data;
 
 typedef struct s_map
 {
@@ -89,6 +78,21 @@ typedef struct s_game
 	int enemy_anim_frame;
     // ...autres champs...
 }			t_game;
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	char	**map;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx;
+	void	*window;
+	t_sprites sprites;
+	t_game game;
+}			t_data;
+
 
 void		mlx_pixel(t_data *data, int x, int y, int color);
 int			close_window(t_data *vars);
