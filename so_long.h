@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 13:33:07 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:45:02 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 # include "minilibx-linux/mlx_int.h"
 # include <fcntl.h>
 
-# define HEIGHT_WINDOW 1500
-# define WIDTH_WINDOW 939
 # define TILE 32
-# define HEIGHT_IMAGE 1500
-# define WIDTH_IMAGE 939
-
+#define WIDTH_WINDOW (13 * TILE)
+#define HEIGHT_WINDOW (6 * TILE)
+#define WIDTH_WINDOW (13 * TILE)
+#define HEIGHT_WINDOW (6 * TILE)
 # define X_MAX 11
 # define Y_MAX 5
 

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 13:34:19 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:47:11 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ int main(void)
     map_draw(map, &m, &sprites, &game);
 
     // Hooks pour fermer la fenêtre
-    mlx_hook(m.window, 2, 1L<<0, key_hook, &m);   // Touche Escape
-    mlx_hook(m.window, 17, 0, close_window, &m);  // Croix
+    mlx_hook(m.window, 2, 1L<<0, key_hook, &m);
+    mlx_hook(m.window, 17, 0, close_window, &m);
 
+    // mlx_string_put
     mlx_loop(m.mlx);
 
     close_free_all(m, map);
