@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 10:40:27 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 11:18:07 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int main(void)
     {
         ft_putstr_fd("Error during loading of the map\n", 2);
         return (1);
-    }
-    mlx_put_image_to_window(m.mlx, m.window, img, 0, 0);
-    
+    }    
 
     mlx_hook(m.window, 2, 1L<<0, key_hook, &m);
     mlx_hook(m.window, 17, 0, close_window, &m);
@@ -99,3 +97,4 @@ void    close_free_all(t_data m, char **map)
     free(m.mlx);
     free_tab(map);
 }
+

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 10:40:35 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/25 12:05:07 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 #define TILE 32
 #define HEIGHT_IMAGE 1500
 #define WIDTH_IMAGE 939
+
+#define X_MAX 36
+#define Y_MAX
+
 
 typedef struct	s_data {
 	void	*img;
@@ -47,13 +51,34 @@ typedef struct s_map
 
 typedef struct s_sprites
 {
-    void    *wall;
-    void    *floor;
-    void    *player;
+    void    *wallbluebottom;
+    void    *wallblueleft;
+    void    *wallblueright;
+    void    *wallbluetop;
+    void    *wallwhitebottom;
+    void    *wallwhiteleft;
+    void    *wallwhiteright;
+    void    *wallwhitetop;
+    void    *floorblue;
+    void    *floorwhite;
+    void    *playerbottomleft;
+    void    *playerbottommid;
+    void    *playerbottomright;
+    void    *playerleftleft;
+    void    *playerleftmid;
+    void    *playerleftright;
+    void    *playerrightleft;
+    void    *playerrightmid;
+    void    *playerrightright;
+    void    *playertopright;
+    void    *playertopmid;
+    void    *playertopleft;
     void    *collectible;
     void    *exit;
     void    *enemy;
+    void    *trap;
 }   t_sprites;
+
 
 void    mlx_pixel(t_data *data, int x, int y, int color);
 int close_window(t_data *vars);
