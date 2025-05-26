@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 15:39:55 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/26 10:26:48 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@
 //     return (map);
 // }
 
-static void	free_list(t_list *lst)
-{
-    t_list *tmp;
-    while (lst)
-    {
-        tmp = lst->next;
-        free(lst->line);
-        free(lst);
-        lst = tmp;
-    }
-}
 
 char **create_map(int file)
 {
@@ -54,7 +43,7 @@ char **create_map(int file)
         if (!tmp)
         {
             free(line);
-            free_list(lst);
+            ft_lstclear(&lst, NULL);
             return NULL;
         }
         tmp->line = line;
@@ -70,7 +59,7 @@ char **create_map(int file)
     map = malloc(sizeof(char *) * (size + 1));
     if (!map)
     {
-        free_list(lst);
+        ft_lstclear(&lst, NULL);
         return NULL;
     }
     // Remplissage du tableau

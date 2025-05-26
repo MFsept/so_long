@@ -6,11 +6,9 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 21:43:48 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/26 12:06:22 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../so_long.h"
 
 #include "../so_long.h"
 
@@ -35,7 +33,7 @@ int main(void)
         ft_putstr_fd("Problem when creating the map\n", 2);
         return (1);
     }
-    m.map = map;
+    m.map = map;    
     m.mlx = mlx_init();
     if (!m.mlx)
         return (1);
@@ -51,17 +49,13 @@ int main(void)
     load_map(&m, &sprites);
     load_utils(&m, &sprites);
 
-    // Initialisation de l'animation (exemple)
     game.player_anim_frame = 0;
     game.player_dir = 0;
     game.enemy_anim_frame = 0;
 
-    // Affichage de la map
     map_draw(map, &m, &sprites, &game);
-
-    // Hooks pour fermer la fenêtre
-    mlx_hook(m.window, 2, 1L<<0, key_hook, &m);
     mlx_hook(m.window, 17, 0, close_window, &m);
+    mlx_hook(m.window, KeyPress, KeyPressMask, key_info, &m); //KeyPress //KeyMasks
 
     // mlx_string_put
     mlx_loop(m.mlx);
@@ -70,73 +64,32 @@ int main(void)
     return (0);
 }
 
-
-
-
-
-int key_hook(int keycode, t_data *vars)
+int key_info(int keycode, t_data *m)
 {
+    find_player_pos(m);
     if (keycode == 65307)
-        close_window(vars);
-    return (0);
-}
-
-// int key_hook(int keycode, t_data *vars)
-// {
-//     char **map = vars->map;
-//     int x = 0, y = 0;
-//     int found = 0;
-
-//     // Trouve la position du joueur (P) avec des while
-//     y = 0;
-//     while (map[y] && !found)
-//     {
-//         x = 0;
-//         while (map[y][x])
-//         {
-//             if (map[y][x] == 'P')
-//             {
-//                 found = 1;
-//                 break;
-//             }
-//             x++;
-//         }
-//         if (!found)
-//             y++;
-//     }
-//     if (!found)
+        close_window(m);
+    else if (keycode == 97) //a
+        player_forward(&m -> game);   
+    else if (keycode == 119) //w
+    player_forward(&m -> game);
+    else if (keycode == 115) //s
+        player_back(&m -> game);
+    else if (keycode == 100) //d
+        player_right(&m -> game);
+    
+//     if (//aucun changement)
 //         return (0);
-
-//     int nx = x, ny = y;
-//     if (keycode == 65307) // echap
-//         close_window(vars);
-//     else if (keycode == 119) // w
-//         ny--;
-//     else if (keycode == 115) // s
-//         ny++;
-//     else if (keycode == 97) // a
-//         nx--;
-//     else if (keycode == 100) // d
-//         nx++;
-//     else
-//         return (0); // Ignore les autres touches
-
-//     // Vérifie que la case cible est dans la map
-//     if (ny < 0 || nx < 0 || !map[ny] || !map[ny][nx])
-//         return (0);
-
-//     // Vérifie que la case cible n'est pas un mur
-//     if (map[ny][nx] != '1')
-//     {
-//         map[y][x] = '0';
-//         map[ny][nx] = 'P';
-//         map_draw(map, vars, &vars->sprites, &vars->game);
-//     }
+//     map[y][x] = '0'; // a trouver comment faire
+//     map[m->game.player_y][m->game.player_x] = 'P';
+//     m->game.player_anim_frame = (m -> game.player_anim_frame + 1) % 3;
+//     map_draw(m ->map, m, &m->sprites, &m->game);
 //     return (0);
 // }
-int close_window(t_data *vars)
+
+int close_window(t_data *m)
 {
-    mlx_destroy_window(vars->mlx, vars->window);
+    mlx_destroy_window(m->mlx, m->window);
     exit(EXIT_SUCCESS);
     return(0);
 }

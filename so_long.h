@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 21:40:28 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/26 11:30:04 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include "libft/printf/ft_printf.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
+# include <X11/Xlib.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
 
 # define TILE 32
@@ -23,18 +26,6 @@
 #define HEIGHT_WINDOW 12 * TILE
 # define X_MAX 19
 # define Y_MAX 11
-
-
-typedef struct s_map
-{
-	char	**grid;
-	int		width;
-	int		height;
-	int		player_x;
-	int		player_y;
-	int		collectibles;
-	int		moves;
-}			t_map;
 
 typedef struct s_sprites
 {
@@ -76,6 +67,9 @@ typedef struct s_game
 	int player_anim_frame; // 0, 1, 2
 	int player_dir;        // 0 = bas, 1 = gauche, 2 = droite, 3 = haut
 	int enemy_anim_frame;
+	int		player_x;
+	int		player_y;
+	int		player_pos;
     // ...autres champs...
 }			t_game;
 
@@ -96,7 +90,7 @@ typedef struct s_data
 
 void		mlx_pixel(t_data *data, int x, int y, int color);
 int			close_window(t_data *vars);
-int			key_hook(int keycode, t_data *vars);
+int 		key_info(int keycode, t_data *m);
 
 // map
 char		**create_map(int file);
@@ -123,5 +117,15 @@ void put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
 void put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
 void put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
+
+
+
+
+//player
+void player_forward(t_game *game);
+void player_back(t_game *game);
+void player_left(t_game *game);
+void player_right(t_game *game);
+void find_player_pos(t_data *m);
 
 #endif

@@ -6,20 +6,19 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/25 21:05:35 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:45:32 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-#include <stdio.h>
 
 void *load_sprite(void *mlx, char *path)
 {
     int w, h;
     void *img = mlx_xpm_file_to_image(mlx, path, &w, &h);
     if (!img)
-        printf("Erreur chargement sprite : %s\n", path);
+        ft_printf("Erreur chargement sprite : %s\n", path);
     return img;
 }
 
@@ -68,7 +67,6 @@ void load_utils(t_data *m, t_sprites *sprites)
     sprites->trapclose = load_sprite(m->mlx, "assets/utils/trapclose.xpm");
 }
 
-// Affichage d'une case mur avec alternance
 void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
 {
     if (y == 0)
@@ -101,7 +99,6 @@ void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
     }
 }
 
-// Affichage d'une case sol avec alternance
 void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
 {
     if ((x + y) % 2 == 0)
@@ -110,7 +107,6 @@ void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
         mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorwhite, x * TILE, y * TILE);
 }
 
-// Affichage des autres éléments
 void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
 {
     if (game->player_dir == 0) // bas
