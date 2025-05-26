@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/26 12:06:22 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:03:08 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,12 @@ int main(void)
 
 int key_info(int keycode, t_data *m)
 {
+    int x;
+    int y;
+    
     find_player_pos(m);
+    x = m->game.player_x;
+    y = m->game.player_y;
     if (keycode == 65307)
         close_window(m);
     else if (keycode == 97) //a
@@ -78,14 +83,15 @@ int key_info(int keycode, t_data *m)
     else if (keycode == 100) //d
         player_right(&m -> game);
     
-//     if (//aucun changement)
-//         return (0);
-//     map[y][x] = '0'; // a trouver comment faire
-//     map[m->game.player_y][m->game.player_x] = 'P';
-//     m->game.player_anim_frame = (m -> game.player_anim_frame + 1) % 3;
-//     map_draw(m ->map, m, &m->sprites, &m->game);
-//     return (0);
-// }
+    if (m -> map[m->game.player_y][m->game.player_x] == '1')
+        return (0);
+    m -> map[y][x] = '0';
+    m ->map[m->game.player_y][m->game.player_x] = 'P';
+    m->game.player_anim_frame = (m -> game.player_anim_frame + 1) % 3;
+    map_draw(m ->map, m, &m->sprites, &m->game);
+    return (0);
+}
+
 
 int close_window(t_data *m)
 {
