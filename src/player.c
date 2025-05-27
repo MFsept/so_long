@@ -6,36 +6,62 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:45 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/26 11:57:48 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:06:13 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 
-void player_forward(t_game *game)
+void player_forward(t_data *m)
 {
-    game->player_y -= 1;
-    game->player_dir = 3;
+    int x = m->game.player_x;
+    int y = m->game.player_y;
+
+    if (y > 0 && m->map[y - 1][x] != '1')
+    {
+        m->game.player_y -= 1;
+        m->game.player_dir = 3;
+    }
 }
 
-void player_back(t_game *game)
+void player_back(t_data *m)
 {
-    game->player_y += 1;
-    game->player_dir = 0;
+    int x = m->game.player_x;
+    int y = m->game.player_y;
+
+    if (y + 1 < Y_MAX && m->map[y + 1][x] != '1')
+    {
+        m->game.player_y += 1;
+        m->game.player_dir = 0;
+    }
 }
 
-void player_left(t_game *game)
+void player_left(t_data *m)
 {
-    game->player_x -= 1;
-    game->player_dir = 1;
+    int x = m->game.player_x;
+    int y = m->game.player_y;
+
+    if (x > 0 && m->map[y][x - 1] != '1')
+    {
+        m->game.player_x -= 1;
+        m->game.player_dir = 1;
+    }
 }
 
-void player_right(t_game *game)
+void player_right(t_data *m)
 {
-    game->player_x += 1;
-    game->player_dir = 2;
+    int x = m->game.player_x;
+    int y = m->game.player_y;
+
+    if (x + 1 < X_MAX && m->map[y][x + 1] != '1')
+    {
+        m->game.player_x += 1;
+        m->game.player_dir = 2;
+    }
 }
+
+
 
 void find_player_pos(t_data *m)
 {

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/26 11:30:04 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:43:57 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,44 +88,39 @@ typedef struct s_data
 }			t_data;
 
 
-void		mlx_pixel(t_data *data, int x, int y, int color);
+// GESTION FENÊTRE / ÉVÉNEMENTS
 int			close_window(t_data *vars);
 int 		key_info(int keycode, t_data *m);
 
-// map
+// MAP
 char		**create_map(int file);
 void		map_fill(char **map);
 int			nb_lines(int file);
 int			check_char(char **tab);
-void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game);
-
+void		map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game);
 void		free_tab(char **tab);
-void    close_free_all(t_data m, char **map);
-void destroy_sprites(t_data *m, t_sprites *sprites);
+void		close_free_all(t_data m, char **map);
+void		destroy_sprites(t_data *m, t_sprites *sprites);
+void update_player_draw(t_data *m, int old_x, int old_y);
 
+// SPRITES
+void		*load_sprite(void *mlx, char *path);
+void		load_player(t_data *m, t_sprites *sprites);
+void		load_map(t_data *m, t_sprites *sprites);
+void		load_utils(t_data *m, t_sprites *sprites);
+void		put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
+void		put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
+void		put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
+void		put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
+void		put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
+void		put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
+void		put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
+void		put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
 
-//sprites 
-void *load_sprite(void *mlx, char *path);
-void load_player(t_data *m, t_sprites *sprites);
-void load_map(t_data *m, t_sprites *sprites);
-void load_utils(t_data *m, t_sprites *sprites);
-void put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
-void put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
-void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
-void put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
-void put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
-void put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
-void put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
-void put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
-
-
-
-
-//player
-void player_forward(t_game *game);
-void player_back(t_game *game);
-void player_left(t_game *game);
-void player_right(t_game *game);
-void find_player_pos(t_data *m);
-
+// PLAYER
+void		player_forward(t_data *m);
+void		player_back(t_data *m);
+void		player_left(t_data *m);
+void		player_right(t_data *m);
+void		find_player_pos(t_data *m);
 #endif

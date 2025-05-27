@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/26 13:03:08 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:44:05 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int main(void)
     int     fd;
     char    **map;
     t_data  m;
-    t_sprites sprites;
-    t_game  game;
+    // t_sprites sprites;0
+    // t_game  game;
 
     fd = open("map.ber", O_RDONLY);
     if (fd < 0)
@@ -44,22 +44,22 @@ int main(void)
         mlx_destroy_display(m.mlx);
         return (free(m.mlx), 1);
     }
-    // Chargement des sprites
-    load_player(&m, &sprites);
-    load_map(&m, &sprites);
-    load_utils(&m, &sprites);
+    
+    load_player(&m, &m.sprites);
+    load_map(&m, &m.sprites);
+    load_utils(&m, &m.sprites);
 
-    game.player_anim_frame = 0;
-    game.player_dir = 0;
-    game.enemy_anim_frame = 0;
+    m.game.player_anim_frame = 0;
+    m.game.player_dir = 0;
+    m.game.enemy_anim_frame = 0;
 
-    map_draw(map, &m, &sprites, &game);
+    map_draw(map, &m, &m.sprites, &m.game);
     mlx_hook(m.window, 17, 0, close_window, &m);
-    mlx_hook(m.window, KeyPress, KeyPressMask, key_info, &m); //KeyPress //KeyMasks
+    mlx_hook(m.window, KeyPress, KeyPressMask, key_info, &m);
 
     // mlx_string_put
     mlx_loop(m.mlx);
-    destroy_sprites(&m, &sprites);
+    destroy_sprites(&m, &m.sprites);
     close_free_all(m, map);
     return (0);
 }
@@ -75,15 +75,15 @@ int key_info(int keycode, t_data *m)
     if (keycode == 65307)
         close_window(m);
     else if (keycode == 97) //a
-        player_forward(&m -> game);   
+        player_left(m);   
     else if (keycode == 119) //w
-    player_forward(&m -> game);
+        player_forward(m);
     else if (keycode == 115) //s
-        player_back(&m -> game);
+        player_back(m);
     else if (keycode == 100) //d
-        player_right(&m -> game);
+        player_right(m);
     
-    if (m -> map[m->game.player_y][m->game.player_x] == '1')
+    if (m -> map[y][x] == '1')
         return (0);
     m -> map[y][x] = '0';
     m ->map[m->game.player_y][m->game.player_x] = 'P';
@@ -91,6 +91,46 @@ int key_info(int keycode, t_data *m)
     map_draw(m ->map, m, &m->sprites, &m->game);
     return (0);
 }
+
+// int key_info(int keycode, t_data *m)
+// {
+//     int old_x;
+//     int old_y;
+
+//     find_player_pos(m);
+//     old_x = m->game.player_x;
+//     old_y = m->game.player_y;
+
+//     if (keycode == 65307)
+//         close_window(m);
+//     else if (keycode == 97)        // A
+//         player_left(m);
+//     else if (keycode == 119)       // W
+//         player_forward(m);
+//     else if (keycode == 115)       // S
+//         player_back(m);
+//     else if (keycode == 100)       // D
+//         player_right(m);
+
+//     // Supprime l'ancienne position uniquement si elle est valide
+//     if (old_y >= 0 && old_y < Y_MAX && old_x >= 0 && old_x < X_MAX &&
+//         m->map[old_y][old_x] == 'P')
+//         m->map[old_y][old_x] = '0';
+
+//     // Place le joueur à la nouvelle position si elle est valide
+//     if (m->game.player_y >= 0 && m->game.player_y < Y_MAX &&
+//         m->game.player_x >= 0 && m->game.player_x < X_MAX)
+//         m->map[m->game.player_y][m->game.player_x] = 'P';
+
+//     // Animation du joueur
+//     m->game.player_anim_frame = (m->game.player_anim_frame + 1) % 3;
+
+//     // Redessine la map
+//     update_player_draw(m, old_x, old_y);
+
+//     return 0;
+// }
+
 
 
 int close_window(t_data *m)

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/26 10:26:48 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:09:04 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,15 @@ void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
         }
         y++;
     }
+}
+void update_player_draw(t_data *m, int old_x, int old_y)
+{
+    // Redessine l'ancien emplacement (sol)
+    if (old_y >= 0 && old_y < Y_MAX && old_x >= 0 && old_x < X_MAX)
+        put_floor(m, &m->sprites, old_x, old_y);
+
+    // Redessine le joueur à sa nouvelle position
+    if (m->game.player_y >= 0 && m->game.player_y < Y_MAX &&
+        m->game.player_x >= 0 && m->game.player_x < X_MAX)
+        put_player(m, &m->sprites, &m->game, m->game.player_x, m->game.player_y);
 }
