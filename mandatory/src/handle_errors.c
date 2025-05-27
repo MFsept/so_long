@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 18:26:05 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:46:57 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,36 @@
 // check_wall -> verifier que toutes la map est encadre par des murs sinon return error;
 // check_chemin_valid -> verifier si il y a
 
-int check_map(t_data m, int fd)
+// int    check_errors(t_data m, int ac, char **av)
+// {
+        // 
+// }
+int check_file(int ac, char **av)
+{
+    if (ac != 2)
+    {
+        perror("Wrong number of arguments");
+        return (0);
+    }
+    if (!(ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".ber", 4) == 0))
+    {
+        perror("Bad extension for the map");
+        return (0);
+    }
+    return (1);
+       
+}
+int check_map(t_data m)
 {
     size_t len;
-    int i;
-    i = 0;
+    int i = 0;
 
-    while(m.map[i])
+    if (!m.map || !m.map[0])
+        return (0);
+    len = ft_strlen(m.map[0]);
+    while (m.map[i])
     {
-        len = ft_strlen(get_next_line(fd)) + 1;
-        if (len != ft_strlen(m.map[i]) + 1)
+        if (ft_strlen(m.map[i]) != len)
             return (0);
         i++;
     }
@@ -65,6 +85,7 @@ int check_content(t_data m)
 }
 int check_double(t_data m)
 {
+    int i;
     int j;
     int count_exit;
     int count_player;
@@ -72,15 +93,18 @@ int check_double(t_data m)
     j = 0;
     count_exit = 0;
     count_player = 0;
-    while(m.map[j])
+    while (m.map[j])
     {
-        if (ft_strchr(m.map[j], 'P') != 0)
-            count_player++;
-        else if (ft_strchr(m.map[j], 'E') != 0)
-            count_exit++;
-        if (count_exit > 1 || count_player > 1)
-            return (0);
-        j++;        
+        i = 0;
+        while (m.map[j][i])
+        {
+            if (m.map[j][i] == 'P')
+                count_player++;
+            else if (m.map[j][i] == 'E')
+                count_exit++;
+            i++;
+        }
+        j++;
     }
     return(1);
 }
@@ -89,4 +113,10 @@ int check_double(t_data m)
 //     int i;
 //     int j;
     
+// }
+
+
+// int check_valid_path(t_data m)
+// {
+    // 
 // }

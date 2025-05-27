@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 18:28:07 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:11:24 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char **create_map(int file)
     char    *line;
     int     size = 0, i = 0;
 
-    // Lecture du fichier et stockage dans une liste chaînée
     while ((line = get_next_line(file)) != NULL)
     {
         tmp = malloc(sizeof(t_list));
@@ -55,14 +54,12 @@ char **create_map(int file)
         last = tmp;
         size++;
     }
-    // Allocation du tableau final
     map = malloc(sizeof(char *) * (size + 1));
     if (!map)
     {
         ft_lstclear(&lst, NULL);
         return NULL;
     }
-    // Remplissage du tableau
     tmp = lst;
     while (tmp)
     {
@@ -70,7 +67,6 @@ char **create_map(int file)
         tmp = tmp->next;
     }
     map[i] = NULL;
-    // Libération de la liste (mais pas des lignes, elles sont dans map)
     tmp = lst;
     while (tmp)
     {
@@ -171,11 +167,9 @@ void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
 }
 void update_player_draw(t_data *m, int old_x, int old_y)
 {
-    // Redessine l'ancien emplacement (sol)
     if (old_y >= 0 && old_y < Y_MAX && old_x >= 0 && old_x < X_MAX)
         put_floor(m, &m->sprites, old_x, old_y);
 
-    // Redessine le joueur à sa nouvelle position
     if (m->game.player_y >= 0 && m->game.player_y < Y_MAX &&
         m->game.player_x >= 0 && m->game.player_x < X_MAX)
         put_player(m, &m->sprites, &m->game, m->game.player_x, m->game.player_y);

@@ -2,11 +2,11 @@ NAME = so_long
 
 NAME_BONUS = bonus_so_long
 
-SRC = src/so_long.c \
-      src/map.c \
-      src/sprites.c \
-      src/player.c \
-      src/handle_errors.c \
+SRC = mandatory/src/so_long.c \
+      mandatory/src/map.c \
+      mandatory/src/sprites.c \
+      mandatory/src/player.c \
+      mandatory/src/handle_errors.c \
       libft/ft_split.c \
       libft/ft_putstr_fd.c \
       libft/ft_strlen.c \
@@ -21,7 +21,9 @@ SRC = src/so_long.c \
       libft/printf/ft_putnbr_us.c \
       libft/printf/ft_putnbr_base.c \
       libft/ft_lstclear.c \
-      libft/ft_lstdelone.c 
+      libft/ft_lstdelone.c \
+      libft/ft_strchr.c \
+      libft/ft_strncmp.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,7 +34,7 @@ MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 MLX_EX = minilibx-linux/libmlx.a
 
-INC = so_long.h \
+INC = mandatory/so_long.h \
     libft/libft.h \
     libft/printf/ft_printf.h \
 	libft/gnl/get_next_line.h 

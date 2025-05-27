@@ -6,17 +6,17 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 18:11:53 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:04:48 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft/libft.h"
-# include "libft/printf/ft_printf.h"
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
+# include "../libft/libft.h"
+# include "../libft/printf/ft_printf.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -123,4 +123,14 @@ void		player_back(t_data *m);
 void		player_left(t_data *m);
 void		player_right(t_data *m);
 void		find_player_pos(t_data *m);
+
+
+//ERRORS
+int    check_errors(t_data m, int ac, char **av);
+int check_file(int ac, char **av);
+int check_map(t_data m);
+int check_content(t_data m);
+int check_double(t_data m);
+int check_wall(t_data m);
+int check_valid_path(t_data m);
 #endif

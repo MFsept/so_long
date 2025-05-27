@@ -6,21 +6,21 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 18:23:59 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:11:42 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int main(void)
+int main(int ac, char **av)
 {
     int     fd;
     char    **map;
     t_data  m;
-    // t_sprites sprites;0
-    // t_game  game;
 
-    fd = open("map.ber", O_RDONLY);
+    if (check_file(ac, av) == 0)
+        return (0);
+    fd = open("mandatory/map.ber", O_RDONLY);
     if (fd < 0)
     {
         ft_putstr_fd("Can't open the file\n", 2);
@@ -88,48 +88,10 @@ int key_info(int keycode, t_data *m)
     m -> map[y][x] = '0';
     m ->map[m->game.player_y][m->game.player_x] = 'P';
     m->game.player_anim_frame = (m -> game.player_anim_frame + 1) % 3;
-    update_player_draw(m, x, y);
+    // update_player_draw(m, x, y);
+    map_draw(m -> map, m, &m -> sprites, &m -> game);
     return (0);
 }
-
-// int key_info(int keycode, t_data *m)
-// {
-//     int old_x;
-//     int old_y;
-
-//     find_player_pos(m);
-//     old_x = m->game.player_x;
-//     old_y = m->game.player_y;
-
-//     if (keycode == 65307)
-//         close_window(m);
-//     else if (keycode == 97)        // A
-//         player_left(m);
-//     else if (keycode == 119)       // W
-//         player_forward(m);
-//     else if (keycode == 115)       // S
-//         player_back(m);
-//     else if (keycode == 100)       // D
-//         player_right(m);
-
-//     // Supprime l'ancienne position uniquement si elle est valide
-//     if (old_y >= 0 && old_y < Y_MAX && old_x >= 0 && old_x < X_MAX &&
-//         m->map[old_y][old_x] == 'P')
-//         m->map[old_y][old_x] = '0';
-
-//     // Place le joueur à la nouvelle position si elle est valide
-//     if (m->game.player_y >= 0 && m->game.player_y < Y_MAX &&
-//         m->game.player_x >= 0 && m->game.player_x < X_MAX)
-//         m->map[m->game.player_y][m->game.player_x] = 'P';
-
-//     // Animation du joueur
-//     m->game.player_anim_frame = (m->game.player_anim_frame + 1) % 3;
-
-//     // Redessine la map
-//     update_player_draw(m, old_x, old_y);
-
-//     return 0;
-// }
 
 
 
