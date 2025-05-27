@@ -1,5 +1,7 @@
 NAME = so_long
 
+NAME_BONUS = bonus_so_long
+
 SRC = src/so_long.c \
       src/map.c \
       src/sprites.c \
@@ -23,6 +25,9 @@ SRC = src/so_long.c \
 
 OBJ = $(SRC:.c=.o)
 
+SRC_BONUS = 
+
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 MLX_EX = minilibx-linux/libmlx.a
@@ -41,15 +46,18 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ) $(MLX_EX) -o $(NAME)
 
+bonus: $(OBJ_BONUS)
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ_BONUS) $(MLX_EX) -o $(NAME_BONUS)
+
 %.o: %.c $(INC)
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 
 re: fclean all
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all bonus
