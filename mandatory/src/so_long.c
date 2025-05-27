@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 21:27:26 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:50:07 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ int main(int ac, char **av)
         ft_putstr_fd("Problem when creating the map\n", 2);
         return (1);
     }
-
-
-
-
-
-
-    
     m.mlx = mlx_init();
     if (!m.mlx)
         return (1);

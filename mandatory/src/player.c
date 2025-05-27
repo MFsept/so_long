@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:45 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 21:39:34 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:57:32 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void player_forward(t_data *m)
     int x = m->game.player_x;
     int y = m->game.player_y;
 
-    if (y > 0 && m->map[y - 1][x] != '1' &&  m->map[y - 1][x] != 'E')
+    if (y > 0 && m->map[y - 1][x] != '1')
     {
+        if (m->map[y - 1][x] == 'E') //et que les collectibles soieent tous ramases )
+        {
+            exit(1);
+        }
         m->game.player_y -= 1;
         m->game.player_dir = 3;
     }
@@ -32,7 +36,7 @@ void player_back(t_data *m)
 
     if (y + 1 < Y_MAX && m->map[y + 1][x] != '1')
     {
-        if (m->map[y + 1][x] == 'E' //et que les collectibles soieent tous ramases )
+        if (m->map[y + 1][x] == 'E') //et que les collectibles soieent tous ramases )
         {
             exit(1);
         }
@@ -46,8 +50,12 @@ void player_left(t_data *m)
     int x = m->game.player_x;
     int y = m->game.player_y;
 
-    if (x > 0 && m->map[y][x - 1] != '1' && m->map[y][x - 1] != 'E')
+    if (x > 0 && m->map[y][x - 1] != '1')
     {
+        if (m->map[y][x - 1] == 'E') //et que les collectibles soieent tous ramases )
+        {
+            exit(1);
+        }
         m->game.player_x -= 1;
         m->game.player_dir = 1;
     }
@@ -58,8 +66,12 @@ void player_right(t_data *m)
     int x = m->game.player_x;
     int y = m->game.player_y;
 
-    if (x + 1 < X_MAX && m->map[y][x + 1] != '1' && m->map[y][x + 1] != 'E')
+    if (x + 1 < X_MAX && m->map[y][x + 1] != '1')
     {
+        if (m->map[y][x + 1] == 'E') //et que les collectibles soieent tous ramases )
+        {
+            exit(1);
+        }
         m->game.player_x += 1;
         m->game.player_dir = 2;
     }
