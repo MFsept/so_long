@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 20:11:42 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:27:26 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int main(int ac, char **av)
 {
     int     fd;
-    char    **map;
     t_data  m;
 
     if (check_file(ac, av) == 0)
@@ -26,25 +25,29 @@ int main(int ac, char **av)
         ft_putstr_fd("Can't open the file\n", 2);
         return (1);
     }
-    map = create_map(fd);
+    m.map = create_map(fd);
     close(fd);
-    if (!map)
+    if (!m.map)
     {
         ft_putstr_fd("Problem when creating the map\n", 2);
         return (1);
     }
-    m.map = map;    
+
+
+
+
+
+
+    
     m.mlx = mlx_init();
     if (!m.mlx)
         return (1);
-
     m.window = mlx_new_window(m.mlx, WIDTH_WINDOW, HEIGHT_WINDOW, "My Game");
     if (!m.window)
     {
         mlx_destroy_display(m.mlx);
         return (free(m.mlx), 1);
     }
-    
     load_player(&m, &m.sprites);
     load_map(&m, &m.sprites);
     load_utils(&m, &m.sprites);
@@ -53,14 +56,14 @@ int main(int ac, char **av)
     m.game.player_dir = 0;
     m.game.enemy_anim_frame = 0;
 
-    map_draw(map, &m, &m.sprites, &m.game);
+    map_draw(m.map, &m, &m.sprites, &m.game);
     mlx_hook(m.window, 17, 0, close_window, &m);
     mlx_hook(m.window, KeyPress, KeyPressMask, key_info, &m);
 
     // mlx_string_put
     mlx_loop(m.mlx);
     destroy_sprites(&m, &m.sprites);
-    close_free_all(m, map);
+    close_free_all(m, m.map);
     return (0);
 }
 

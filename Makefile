@@ -27,7 +27,9 @@ SRC = mandatory/src/so_long.c \
 
 OBJ = $(SRC:.c=.o)
 
-SRC_BONUS = 
+SRC_BONUS = bonus/so_long_bonus.c \
+            map_bonus.c \
+            sprites_bonus.c 
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz

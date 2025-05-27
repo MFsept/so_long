@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 18:22:04 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:24:26 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteleft, x * TILE, y * TILE);
     }
     else if (x == X_MAX && y != 0 && y != Y_MAX)
+    {
+        if ((x + y) % 2 == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueright, x * TILE, y * TILE);
+        else
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteright, x * TILE, y * TILE);
+    }
+    else
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueright, x * TILE, y * TILE);
