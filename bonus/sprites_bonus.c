@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 15:06:06 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:37:42 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
         mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorblue, x * TILE, y * TILE);
     else
         mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorwhite, x * TILE, y * TILE);
-    // mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorblue, x * TILE, y * TILE);
 }
 
 void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)

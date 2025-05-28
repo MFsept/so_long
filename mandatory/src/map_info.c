@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:06:01 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 15:33:56 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:45:36 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	width_window(t_data m)
 {
-	return(ft_strlen(m.map[0]));
+	return(ft_strlen(m.map[0]) - 1);
 }
 
 int	height_window(t_data m)
@@ -28,7 +28,7 @@ int	height_window(t_data m)
 }
 int	x_max(int x)
 {
-	return (x - 2);
+	return (x - 1);
 }
 
 int	y_max(int y)
