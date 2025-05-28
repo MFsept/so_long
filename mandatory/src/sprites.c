@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 11:59:04 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:33:38 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,21 @@ void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhitetop, x * TILE, y * TILE);
     }
-    else if(y == Y_MAX)
+    else if(y == y_max(height_window((*mlx))))
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallbluebottom, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhitebottom, x * TILE, y * TILE);
     }
-    else if (x == 0 && y != 0 && y != Y_MAX)
+    else if (x == 0 && y != 0 && y != y_max(height_window((*mlx))))
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueleft, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteleft, x * TILE, y * TILE);
     }
-    else if (x == X_MAX && y != 0 && y != Y_MAX)
+    else if (x == x_max(width_window((*mlx))) && y != 0 && y != y_max(height_window((*mlx))))
     {
         if ((x + y) % 2 == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueright, x * TILE, y * TILE);

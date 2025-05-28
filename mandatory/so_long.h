@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 14:08:43 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:01:41 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ typedef struct s_game
 	int			collected;
 	int			total_collectibles;
 	int			steps;
-	int	x_max;
-	int	y_max;
-	int	width_window;
-	int	height_window;
+	int			x_max;
+	int			y_max;
+	int			width_window;
+	int			height_window;
 }				t_game;
 
 typedef struct s_data
@@ -94,9 +94,16 @@ typedef struct s_data
 	t_game		game;
 }				t_data;
 
-//UTILS
+// UTILS
 int				close_window(t_data *vars);
 int				key_info(int keycode, t_data *m);
+
+// MAP INFO
+
+int				width_window(t_data m);
+int				height_window(t_data m);
+int				x_max(int x);
+int				y_max(int y);
 
 // MAP
 char			**create_map(int file);

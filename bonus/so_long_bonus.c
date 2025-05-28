@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 10:16:14 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:36:59 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(void)
     if (!m.mlx)
         return (1);
 
-    m.window = mlx_new_window(m.mlx, WIDTH_WINDOW, HEIGHT_WINDOW, "My Game");
+    m.window = mlx_new_window(m.mlx,/* WIDTH_WINDOW, HEIGHT_WINDOW,*/ "My Game");
     if (!m.window)
     {
         mlx_destroy_display(m.mlx);

@@ -9,6 +9,7 @@ SRC = mandatory/src/so_long.c \
       mandatory/src/handle_errors.c \
       mandatory/src/collectible.c \
       mandatory/src/utils.c \
+      mandatory/src/map_info.c \
       libft/ft_split.c \
       libft/ft_putstr_fd.c \
       libft/ft_strlen.c \

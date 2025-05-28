@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:45 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 11:39:17 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:06:15 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void player_back(t_data *m)
     int x = m->game.player_x;
     int y = m->game.player_y;
 
-    if (y + 1 < Y_MAX && m->map[y + 1][x] != '1')
+    if (y + 1 < y_max(height_window((*m))) && m->map[y + 1][x] != '1')
     {
         if (m->map[y + 1][x] == 'E' && m->game.collected != m->game.total_collectibles)
             return ;
@@ -60,7 +60,7 @@ void player_right(t_data *m)
     int x = m->game.player_x;
     int y = m->game.player_y;
 
-    if (x + 1 < X_MAX && m->map[y][x + 1] != '1')
+    if (x + 1 < x_max(width_window((*m))) && m->map[y][x + 1] != '1')
     {
         if (m->map[y][x + 1] == 'E' && m->game.collected != m->game.total_collectibles)
             return ;

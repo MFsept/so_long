@@ -6,20 +6,32 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:06:01 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 14:31:23 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:33:56 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-# define WIDTH_WINDOW 20 * TILE
-# define HEIGHT_WINDOW 12 * TILE
-# define X_MAX 19
-# define Y_MAX 11
-
-int width_window(t_data m)
+int	width_window(t_data m)
 {
-    int i;
-    int j;
-    while(m.map[j][i])
+	return(ft_strlen(m.map[0]));
+}
+
+int	height_window(t_data m)
+{
+	int	i;
+
+	i = 0;
+	while (m.map[i])
+		i++;
+	return (i);
+}
+int	x_max(int x)
+{
+	return (x - 2);
+}
+
+int	y_max(int y)
+{
+	return (y - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 21:34:30 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:06:40 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@
 # include <fcntl.h>
 
 # define TILE 32
-#define WIDTH_WINDOW 20 * TILE
-#define HEIGHT_WINDOW 12 * TILE
-# define X_MAX 19
-# define Y_MAX 11
 
 typedef struct s_sprites
 {
