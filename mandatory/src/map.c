@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 20:11:24 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:56:52 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char **create_map(int file)
     map = malloc(sizeof(char *) * (size + 1));
     if (!map)
     {
+        free(line);
         ft_lstclear(&lst, NULL);
         return NULL;
     }
@@ -164,13 +165,4 @@ void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
         }
         y++;
     }
-}
-void update_player_draw(t_data *m, int old_x, int old_y)
-{
-    if (old_y >= 0 && old_y < Y_MAX && old_x >= 0 && old_x < X_MAX)
-        put_floor(m, &m->sprites, old_x, old_y);
-
-    if (m->game.player_y >= 0 && m->game.player_y < Y_MAX &&
-        m->game.player_x >= 0 && m->game.player_x < X_MAX)
-        put_player(m, &m->sprites, &m->game, m->game.player_x, m->game.player_y);
 }

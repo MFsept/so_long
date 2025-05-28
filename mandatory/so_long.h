@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 20:04:48 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:08:43 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,115 +22,127 @@
 # include <fcntl.h>
 
 # define TILE 32
-#define WIDTH_WINDOW 20 * TILE
-#define HEIGHT_WINDOW 12 * TILE
+# define WIDTH_WINDOW 20 * TILE
+# define HEIGHT_WINDOW 12 * TILE
 # define X_MAX 19
 # define Y_MAX 11
 
 typedef struct s_sprites
 {
-	void	*wallbluebottom;
-	void	*wallblueleft;
-	void	*wallblueright;
-	void	*wallbluetop;
-	void	*wallwhitebottom;
-	void	*wallwhiteleft;
-	void	*wallwhiteright;
-	void	*wallwhitetop;
-	void	*floorblue;
-	void	*floorwhite;
-	void	*playerbottomleft;
-	void	*playerbottommid;
-	void	*playerbottomright;
-	void	*playerleftleft;
-	void	*playerleftmid;
-	void	*playerleftright;
-	void	*playerrightleft;
-	void	*playerrightmid;
-	void	*playerrightright;
-	void	*playertopright;
-	void	*playertopmid;
-	void	*playertopleft;
-	void	*cheese;
-	void	*fakecheese;
-	void	*exit;
-	void	*enemy1;
-	void	*enemy2;
-	void	*enemy3;
-	void	*jerrydeath;
-	void	*trapopen;
-	void	*trapclose;
-}			t_sprites;
+	void		*barrels;
+	void		*wallbluebottom;
+	void		*wallblueleft;
+	void		*wallblueright;
+	void		*wallbluetop;
+	void		*wallwhitebottom;
+	void		*wallwhiteleft;
+	void		*wallwhiteright;
+	void		*wallwhitetop;
+	void		*floorblue;
+	void		*floorwhite;
+	void		*playerbottomleft;
+	void		*playerbottommid;
+	void		*playerbottomright;
+	void		*playerleftleft;
+	void		*playerleftmid;
+	void		*playerleftright;
+	void		*playerrightleft;
+	void		*playerrightmid;
+	void		*playerrightright;
+	void		*playertopright;
+	void		*playertopmid;
+	void		*playertopleft;
+	void		*cheese;
+	void		*fakecheese;
+	void		*exit;
+	void		*enemy1;
+	void		*enemy2;
+	void		*enemy3;
+	void		*jerrydeath;
+	void		*trapopen;
+	void		*trapclose;
+}				t_sprites;
 
 typedef struct s_game
 {
-	int player_anim_frame; // 0, 1, 2
-	int player_dir;        // 0 = bas, 1 = gauche, 2 = droite, 3 = haut
-	int enemy_anim_frame;
-	int		player_x;
-	int		player_y;
-	int		player_pos;
-    // ...autres champs...
-}			t_game;
+	int			player_anim_frame;
+	int			player_dir;
+	int			enemy_anim_frame;
+	int			player_x;
+	int			player_y;
+	int			player_pos;
+	int			collected;
+	int			total_collectibles;
+	int			steps;
+	int	x_max;
+	int	y_max;
+	int	width_window;
+	int	height_window;
+}				t_game;
 
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	char	**map;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx;
-	void	*window;
-	t_sprites sprites;
-	t_game game;
-}			t_data;
+	void		*img;
+	char		*addr;
+	char		**map;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	void		*mlx;
+	void		*window;
+	t_sprites	sprites;
+	t_game		game;
+}				t_data;
 
-
-// GESTION FENÊTRE / ÉVÉNEMENTS
-int			close_window(t_data *vars);
-int 		key_info(int keycode, t_data *m);
+//UTILS
+int				close_window(t_data *vars);
+int				key_info(int keycode, t_data *m);
 
 // MAP
-char		**create_map(int file);
-void		map_fill(char **map);
-int			nb_lines(int file);
-int			check_char(char **tab);
-void		map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game);
-void		free_tab(char **tab);
-void		close_free_all(t_data m, char **map);
-void		destroy_sprites(t_data *m, t_sprites *sprites);
-void update_player_draw(t_data *m, int old_x, int old_y);
+char			**create_map(int file);
+void			map_fill(char **map);
+int				nb_lines(int file);
+int				check_char(char **tab);
+void			map_draw(char **map, t_data *mlx, t_sprites *sprites,
+					t_game *game);
+void			free_tab(char **tab);
+void			close_free_all(t_data m, char **map);
+void			destroy_sprites(t_data *m, t_sprites *sprites);
+void			update_player_draw(t_data *m, int old_x, int old_y);
 
 // SPRITES
-void		*load_sprite(void *mlx, char *path);
-void		load_player(t_data *m, t_sprites *sprites);
-void		load_map(t_data *m, t_sprites *sprites);
-void		load_utils(t_data *m, t_sprites *sprites);
-void		put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
-void		put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
-void		put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
-void		put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
-void		put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
-void		put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y);
-void		put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
-void		put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
+void			*load_sprite(void *mlx, char *path);
+void			load_player(t_data *m, t_sprites *sprites);
+void			load_map(t_data *m, t_sprites *sprites);
+void			load_utils(t_data *m, t_sprites *sprites);
+void			put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
+void			put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
+void			put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x,
+					int y);
+void			put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
+void			put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
+void			put_ennemy(t_data *mlx, t_sprites *sprites, t_game *game, int x,
+					int y);
+void			put_trapopen(t_data *mlx, t_sprites *sprites, int x, int y);
+void			put_trapclose(t_data *mlx, t_sprites *sprites, int x, int y);
 
 // PLAYER
-void		player_forward(t_data *m);
-void		player_back(t_data *m);
-void		player_left(t_data *m);
-void		player_right(t_data *m);
-void		find_player_pos(t_data *m);
+void			player_forward(t_data *m);
+void			player_back(t_data *m);
+void			player_left(t_data *m);
+void			player_right(t_data *m);
+void			find_player_pos(t_data *m);
 
+// ERRORS
+int				check_errors(t_data m, int ac, char **av);
+int				check_file(int ac, char **av);
+int				check_map(t_data m);
+int				check_content(t_data m);
+int				check_double(t_data m);
+int				check_wall(t_data m);
+int				check_valid_path(t_data m);
 
-//ERRORS
-int    check_errors(t_data m, int ac, char **av);
-int check_file(int ac, char **av);
-int check_map(t_data m);
-int check_content(t_data m);
-int check_double(t_data m);
-int check_wall(t_data m);
-int check_valid_path(t_data m);
+// collect
+int				collect(t_data *m);
+int				count_collect(t_data *m);
 #endif

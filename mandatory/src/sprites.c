@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 21:24:26 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:59:04 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void load_map(t_data *m, t_sprites *sprites)
     sprites->wallwhitetop = load_sprite(m->mlx, "assets/wall/wallwhitetop.xpm");
     sprites->floorblue = load_sprite(m->mlx, "assets/floor/floorblue.xpm");
     sprites->floorwhite = load_sprite(m->mlx, "assets/floor/floorwhite.xpm");
+    sprites->barrels = load_sprite(m->mlx, "assets/utils/barrel.xpm");
 
 }
 
@@ -91,12 +92,7 @@ void put_wall(t_data *mlx, t_sprites *sprites, int x, int y)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteright, x * TILE, y * TILE);
     }
     else
-    {
-        if ((x + y) % 2 == 1)
-            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueright, x * TILE, y * TILE);
-        else
-            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallwhiteright, x * TILE, y * TILE);
-    }
+        mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->barrels, x * TILE, y * TILE);
 }
 
 void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
@@ -105,7 +101,6 @@ void put_floor(t_data *mlx, t_sprites *sprites, int x, int y)
         mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorblue, x * TILE, y * TILE);
     else
         mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorwhite, x * TILE, y * TILE);
-    // mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->floorblue, x * TILE, y * TILE);
 }
 
 void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
@@ -113,36 +108,36 @@ void put_player(t_data *mlx, t_sprites *sprites, t_game *game, int x, int y)
     if (game->player_dir == 0) // bas
     {
         if (game->player_anim_frame == 0)
-            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottommid, x * TILE, y * TILE);
-        else if (game->player_anim_frame == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottomleft, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottommid, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerbottomright, x * TILE, y * TILE);
     }
     if (game->player_dir == 1) // left
     {
         if (game->player_anim_frame == 0)
-            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftmid, x * TILE, y * TILE);
-        else if (game->player_anim_frame == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftleft, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftmid, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerleftright, x * TILE, y * TILE);
     }
     if (game->player_dir == 2) // right
     {
         if (game->player_anim_frame == 0)
-            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightmid, x * TILE, y * TILE);
-        else if (game->player_anim_frame == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightleft, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightmid, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playerrightright, x * TILE, y * TILE);
     }
     else if (game->player_dir == 3) // top
     {
         if (game->player_anim_frame == 0)
-            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopmid, x * TILE, y * TILE);
-        else if (game->player_anim_frame == 1)
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopleft, x * TILE, y * TILE);
+        else if (game->player_anim_frame == 1)
+            mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopmid, x * TILE, y * TILE);
         else
             mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->playertopright, x * TILE, y * TILE);
     }

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/27 19:46:57 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:58:11 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,24 @@
 // check_wall -> verifier que toutes la map est encadre par des murs sinon return error;
 // check_chemin_valid -> verifier si il y a
 
-// int    check_errors(t_data m, int ac, char **av)
-// {
-        // 
-// }
+int    check_errors(t_data m, int ac, char **av)
+{
+    if (!check_file(ac, av))
+        exit(EXIT_FAILURE);
+    else if (!(check_map(m)))
+        exit(EXIT_FAILURE);
+    else if (!(check_content(m)))
+        exit(EXIT_FAILURE);
+    else if (!(check_double(m)))
+        exit(EXIT_FAILURE);
+    else if (!(check_wall(m)))
+        exit(EXIT_FAILURE);
+    // else if (!(check_valid_path(m)))
+    //     exit(EXIT_FAILURE);
+    exit(EXIT_SUCCESS);
+    
+           
+}
 int check_file(int ac, char **av)
 {
     if (ac != 2)
@@ -79,8 +93,10 @@ int check_content(t_data m)
             continue;
         else
             return (0);
-        j++;        
+        j++;
     }
+    if (player != 1 || exit < 1 || coll < 1)
+        return (0);
     return(1);
 }
 int check_double(t_data m)
@@ -106,17 +122,40 @@ int check_double(t_data m)
         }
         j++;
     }
+    if (count_exit != 1 || count_player != 1)
+        return (0);
     return(1);
 }
-// int check_wall(t_data m)
-// {
-//     int i;
-//     int j;
-    
-// }
+int check_wall(t_data m)
+{
+    int i = 0;
+    int j = 0;
+    int width;
+    int height = 0;
+
+    if (!m.map || !m.map[0])
+        return (0);
+    width = ft_strlen(m.map[0]);
+    while (m.map[height])
+        height++;
+    i = 0;
+    while (i < width)
+    {
+        if (m.map[0][i] != '1' || m.map[height - 1][i] != '1')
+            return (0);
+        i++;
+    }
+    j = 0;
+    while (j < height)
+    {
+        if (m.map[j][0] != '1' || m.map[j][width - 1] != '1')
+            return (0);
+        j++;
+    }
+    return (1);
+}
 
 
 // int check_valid_path(t_data m)
 // {
-    // 
 // }

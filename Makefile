@@ -7,6 +7,8 @@ SRC = mandatory/src/so_long.c \
       mandatory/src/sprites.c \
       mandatory/src/player.c \
       mandatory/src/handle_errors.c \
+      mandatory/src/collectible.c \
+      mandatory/src/utils.c \
       libft/ft_split.c \
       libft/ft_putstr_fd.c \
       libft/ft_strlen.c \
