@@ -6,163 +6,101 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/28 13:56:52 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:18:52 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// char    **create_map(int file)
-// {
-//     char    **map;
-//     char    *line;
-//     int i;
-
-//     i = 0;
-//     map = malloc(sizeof(char *) * (nb_lines(file) + 1));
-//     if (!map)
-//         return (NULL);
-//     while((line = get_next_line(file)) != NULL)
-//         map[i++] = line;
-//     map[i] = NULL;
-//     return (map);
-// }
-
-
-char **create_map(int file)
+void	map_fill(char **map)
 {
-    t_list  *lst = NULL, *last = NULL, *tmp;
-    char    **map;
-    char    *line;
-    int     size = 0, i = 0;
+	int	x;
+	int	y;
 
-    while ((line = get_next_line(file)) != NULL)
-    {
-        tmp = malloc(sizeof(t_list));
-        if (!tmp)
-        {
-            free(line);
-            ft_lstclear(&lst, NULL);
-            return NULL;
-        }
-        tmp->line = line;
-        tmp->next = NULL;
-        if (!lst)
-            lst = tmp;
-        else
-            last->next = tmp;
-        last = tmp;
-        size++;
-    }
-    map = malloc(sizeof(char *) * (size + 1));
-    if (!map)
-    {
-        free(line);
-        ft_lstclear(&lst, NULL);
-        return NULL;
-    }
-    tmp = lst;
-    while (tmp)
-    {
-        map[i++] = tmp->line;
-        tmp = tmp->next;
-    }
-    map[i] = NULL;
-    tmp = lst;
-    while (tmp)
-    {
-        t_list *next = tmp->next;
-        free(tmp);
-        tmp = next;
-    }
-    return map;
+	y = 0;
+	if (!check_char(map))
+		return ;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			ft_putchar_fd(map[y][x], 1);
+			x++;
+		}
+		ft_putchar_fd('\n', 1);
+		y++;
+	}
 }
 
-void map_fill(char **map)
+int	nb_lines(int file)
 {
-    int x;
-    int y;
+	char	*line;
+	int		count;
 
-    y = 0;
-    if (!check_char(map))
-        return ;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            ft_putchar_fd(map[y][x], 1);
-            x++;
-        }
-        ft_putchar_fd('\n', 1);
-        y++;
-    }
+	count = 0;
+	while (1)
+	{
+		line = get_next_line(file);
+		if (!line)
+			return (count);
+		count++;
+		free(line);
+	}
+	return (count);
 }
 
-int nb_lines(int file)
+int	check_char(char **tab)
 {
-    char    *line;
-    int count;
+	int	i;
+	int	j;
 
-    count = 0;
-    while((line = get_next_line(file)) != NULL)
-    {
-        count++;
-        free(line);
-    }
-    return (count);
+	j = 0;
+	while (tab[j])
+	{
+		i = 0;
+		while (tab[j][i])
+		{
+			if (tab[j][i] == '0')
+				i++;
+			else if (tab[j][i] == '1')
+				i++;
+			else if (tab[j][i] == 'P')
+				i++;
+			else if (tab[j][i] == 'E')
+				i++;
+			else if (tab[j][i] == 'C')
+				i++;
+			else
+				return (0);
+		}
+		j++;
+	}
+	return (1);
 }
 
-int check_char(char **tab)
-{
-    int i;
-    int j;
-
-    j = 0;
-    while(tab[j])
-    {
-        i = 0;
-        while(tab[j][i])
-        {
-            if (tab[j][i] == '0')
-                i++;
-            else if (tab[j][i] == '1')
-                i++;
-            else if (tab[j][i] == 'P')
-                i++;
-            else if (tab[j][i] == 'E')
-                i++;
-            else if (tab[j][i] == 'C')
-                i++;
-            else
-                return (0);
-        }
-        j++;
-    }
-    return (1);
-}
 void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
 {
-    int	x;
-    int	y;
+	int	x;
+	int	y;
 
-    y = 0;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            put_floor(mlx, sprites, x, y);
-            if (map[y][x] == '1')
-                put_wall(mlx, sprites, x, y);
-            else if (map[y][x] == 'P')
-                put_player(mlx, sprites,game, x, y);
-            else if (map[y][x] == 'C')
-                put_collectible(mlx, sprites, x, y);
-            else if (map[y][x] == 'E')
-                put_exit(mlx, sprites, x, y);
-            x++;
-        }
-        y++;
-    }
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			put_floor(mlx, sprites, x, y);
+			if (map[y][x] == '1')
+				put_wall(mlx, sprites, x, y);
+			else if (map[y][x] == 'P')
+				put_player(mlx, game, x, y);
+			else if (map[y][x] == 'C')
+				put_collectible(mlx, sprites, x, y);
+			else if (map[y][x] == 'E')
+				put_exit(mlx, sprites, x, y);
+			x++;
+		}
+		y++;
+	}
 }

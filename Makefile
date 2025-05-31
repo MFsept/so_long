@@ -10,6 +10,11 @@ SRC = mandatory/src/so_long.c \
       mandatory/src/collectible.c \
       mandatory/src/utils.c \
       mandatory/src/map_info.c \
+      mandatory/src/create_map.c \
+      mandatory/src/put_player.c \
+      mandatory/src/put_wall.c \
+      mandatory/src/put_utils.c \
+      libft/ft_strdup.c \
       libft/ft_split.c \
       libft/ft_putstr_fd.c \
       libft/ft_strlen.c \
