@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 14:22:27 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:18:00 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	check_errors(t_data *m, int ac, char **av)
 	//     exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }
+
 int	check_file(int ac, char **av)
 {
 	if (ac != 2)
@@ -42,6 +43,7 @@ int	check_file(int ac, char **av)
 	}
 	return (1);
 }
+
 int	check_map(t_data *m)
 {
 	size_t	len;
@@ -88,6 +90,7 @@ int	check_content(t_data *m)
 		return (0);
 	return (1);
 }
+
 int	check_double(t_data *m)
 {
 	int	i;
@@ -115,35 +118,3 @@ int	check_double(t_data *m)
 		return (0);
 	return (1);
 }
-int	check_wall(t_data *m)
-{
-	int	i;
-	int	j;
-	int	width;
-	int	height;
-
-	i = 0;
-	j = 0;
-	height = 0;
-	if (!m->map || !m->map[0])
-		return (0);
-	width = ft_strlen(m->map[0]);
-	while (m->map[height])
-		height++;
-	i = 0;
-	while (i < width)
-	{
-		if (m->map[0][i] != '1' || m->map[height - 1][i] != '1')
-			return (0);
-		i++;
-	}
-	j = -1;
-	while (++j < height)
-		if (m->map[j][0] != '1' || m->map[j][width - 1] != '1')
-			return (0);
-	return (1);
-}
-
-// int check_valid_path(t_data m)
-// {
-// }

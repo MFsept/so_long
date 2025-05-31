@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:03:52 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 14:24:51 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:25:20 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,36 +47,42 @@ static void	maplist_clear(t_maplist *lst)
 	}
 }
 
-char	**create_map(int fd)
+char	**maplist_to_tab(t_maplist *lst, int size)
 {
-	t_maplist	*lst;
-	t_maplist	*tmp;
 	char		**map;
-	char		*line;
 	int			i;
+	t_maplist	*tmp;
 
-	lst = NULL;
-    i = 0;
-	while (1)
-	{
-        line = get_next_line(fd);
-        if (!line)
-            break;
-		if (!maplist_add(&lst, line))
-			return (maplist_clear(lst), NULL);
-		i++;
-	}
-	map = malloc(sizeof(char *) * (i + 1));
-	if (!map)
-		return (maplist_clear(lst), NULL);
-    i = 0;
+	map = malloc(sizeof(char *) * (size + 1));
+	i = 0;
 	tmp = lst;
+	if (!map)
+		return (NULL);
 	while (tmp)
 	{
 		map[i++] = ft_strdup(tmp->line);
 		tmp = tmp->next;
 	}
 	map[i] = NULL;
+	return (map);
+}
+
+char	**create_map(int fd)
+{
+	t_maplist *lst;
+	char *line;
+	int size;
+	char **map;
+
+	lst = NULL;
+	size = 0;
+	while ((line = get_next_line(fd)))
+	{
+		if (!maplist_add(&lst, line))
+			return (maplist_clear(lst), NULL);
+		size++;
+	}
+	map = maplist_to_tab(lst, size);
 	maplist_clear(lst);
 	return (map);
 }

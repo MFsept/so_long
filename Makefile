@@ -14,6 +14,7 @@ SRC = mandatory/src/so_long.c \
       mandatory/src/put_player.c \
       mandatory/src/put_wall.c \
       mandatory/src/put_utils.c \
+      mandatory/src/handle_errors_2.c \
       libft/ft_strdup.c \
       libft/ft_split.c \
       libft/ft_putstr_fd.c \

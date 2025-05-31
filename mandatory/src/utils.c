@@ -6,11 +6,33 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:02:41 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 13:53:55 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:21:07 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+static int	update_map(t_data *m, int x, int y)
+{
+	if (m->game.player_x != x || m->game.player_y != y)
+	{
+		m->game.steps++;
+		ft_printf("Steps: %d\n", m->game.steps);
+	}
+	if (m->map[m->game.player_y][m->game.player_x] == 'C')
+		m->game.collected++;
+	if (m->map[m->game.player_y][m->game.player_x] == 'E')
+	{
+		if (m->game.collected == m->game.total_collectibles)
+			close_window(m);
+		return (0);
+	}
+	m->map[y][x] = '0';
+	m->map[m->game.player_y][m->game.player_x] = 'P';
+	m->game.player_anim_frame = (m->game.player_anim_frame + 1) % 3;
+	map_draw(m->map, m, &m->sprites, &m->game);
+	return (0);
+}
 
 int	key_info(int keycode, t_data *m)
 {
@@ -32,23 +54,7 @@ int	key_info(int keycode, t_data *m)
 		player_right(m);
 	if (m->map[y][x] == '1')
 		return (0);
-	if (m->game.player_x != x || m->game.player_y != y)
-	{
-		m->game.steps++;
-		ft_printf("Steps: %d\n", m->game.steps);
-	}
-	if (m->map[m->game.player_y][m->game.player_x] == 'C')
-		m->game.collected++;
-	if (m->map[m->game.player_y][m->game.player_x] == 'E')
-	{
-		if (m->game.collected == m->game.total_collectibles)
-			close_window(m);
-		return (0);
-	}
-	m->map[y][x] = '0';
-	m->map[m->game.player_y][m->game.player_x] = 'P';
-	m->game.player_anim_frame = (m->game.player_anim_frame + 1) % 3;
-	map_draw(m->map, m, &m->sprites, &m->game);
+	update_map(m, x, y);
 	return (0);
 }
 
