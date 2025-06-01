@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:16:11 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 15:16:57 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 02:16:57 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,60 @@ int	check_wall(t_data *m)
 	return (1);
 }
 
-// int check_valid_path(t_data m)
-// {
-// }
+static void	flood_fill(char **map, int y, int x)
+{
+	if (map[y][x] == '1' || map[y][x] == 'F')
+		return ;
+	map[y][x] = 'F';
+	if (map[y + 1][x])
+		flood_fill(map, y + 1, x);
+	if (y > 0 && map[y - 1][x])
+		flood_fill(map, y - 1, x);
+	if (map[y][x + 1])
+		flood_fill(map, y, x + 1);
+	if (x > 0 && map[y][x - 1])
+		flood_fill(map, y, x - 1);
+}
+
+static char	**dup_map(char **map, int height)
+{
+	char	**copy;
+	int		i;
+
+	copy = malloc(sizeof(char *) * (height + 1));
+	i = 0;
+	if (!copy)
+		return (NULL);
+	while (i < height)
+	{
+		copy[i] = strdup(map[i]);
+		if (!copy[i++])
+			return (NULL);
+	}
+	copy[i] = NULL;
+	return (copy);
+}
+
+int	check_valid_path(t_data *m)
+{
+	int		i;
+	int		j;
+	int		height;
+	int		width;
+	char	**map_copy;
+
+	i = -1;
+	j = -1;
+	height = height_window(m);
+	width = ft_strlen(m->map[0]);
+	map_copy = dup_map(m->map, height);
+	if (!map_copy)
+		return (0);
+	find_player_pos(m);
+	flood_fill(map_copy, m->game.player_y, m->game.player_x);
+	while (++j < height)
+		while (++i < width)
+			if (map_copy[i][j] == 'C' || map_copy[i][j] == 'E')
+				return (free_tab(map_copy), 0);
+	return (free_tab(map_copy), 1);
+}

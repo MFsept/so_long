@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 15:18:00 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 02:16:51 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	check_errors(t_data *m, int ac, char **av)
 		exit(EXIT_FAILURE);
 	else if (!(check_wall(m)))
 		exit(EXIT_FAILURE);
-	// else if (!(check_valid_path(m)))
-	//     exit(EXIT_FAILURE);
+	else if (!(check_valid_path(m)))
+		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }
 
@@ -50,12 +50,16 @@ int	check_map(t_data *m)
 	int		i;
 
 	i = 0;
-	if (!m->map || !m->map[0])
-		return (0);
+	// if (!m->map || !m->map[0])
+	// 	return (0);
 	len = ft_strlen(m->map[0]);
 	while (m->map[i])
 	{
-		if (ft_strlen(m->map[i]) != len && !m->map[i])
+		if (!m->map[i])
+			return (0);
+		if (m->map[i][ft_strlen(m->map[i])] != '\n')
+			len -= 1;
+		if (ft_strlen(m->map[i]) != len)
 			return (0);
 		i++;
 	}

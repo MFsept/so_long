@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:03:52 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 15:25:20 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 02:21:26 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,20 @@ char	**maplist_to_tab(t_maplist *lst, int size)
 
 char	**create_map(int fd)
 {
-	t_maplist *lst;
-	char *line;
-	int size;
-	char **map;
+	t_maplist	*lst;
+	char		*line;
+	int			size;
+	char		**map;
 
 	lst = NULL;
 	size = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (!maplist_add(&lst, line))
 			return (maplist_clear(lst), NULL);
 		size++;
+		line = get_next_line(fd);
 	}
 	map = maplist_to_tab(lst, size);
 	maplist_clear(lst);
