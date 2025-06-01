@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 14:16:26 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:09:31 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,6 @@ void					put_player(t_data *mlx, t_game *game, int x, int y);
 void					put_collectible(t_data *mlx, t_sprites *sprites, int x,
 							int y);
 void					put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
-// void					put_ennemy(t_data *mlx, t_sprites *sprites,
-// 							t_game *game, int x, int y);
-// void					put_trapopen(t_data *mlx, t_sprites *sprites, int x,
-// 							int y);
-// void					put_trapclose(t_data *mlx, t_sprites *sprites, int x,
-// 							int y);
 
 // PLAYER
 void					player_forward(t_data *m);

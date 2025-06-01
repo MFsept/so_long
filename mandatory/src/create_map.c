@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:03:52 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 12:18:47 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:13:46 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	**create_map(int fd)
 	lst = NULL;
 	size = 0;
 	line = get_next_line(fd);
+	if (ft_strlen(line) > 100)
+		return (free(line), NULL);
 	while (line)
 	{
 		remove_nl(line);

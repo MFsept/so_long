@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:16:11 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 14:41:26 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:55:36 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	check_valid_path(t_data *m)
 	int		width;
 	char	**map_copy;
 
-	i = -1;
 	j = -1;
 	height = height_window(m);
 	width = ft_strlen(m->map[0]);
@@ -104,8 +103,11 @@ int	check_valid_path(t_data *m)
 	find_player_pos(m);
 	flood_fill(map_copy, m->game.player_y, m->game.player_x);
 	while (++j < height)
+	{
+		i = -1;
 		while (++i < width)
 			if (map_copy[j][i] == 'C' || map_copy[j][i] == 'E')
 				return (free_print_tab(map_copy), 0);
+	}
 	return (free_tab(map_copy), 1);
 }
