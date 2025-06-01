@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:16:11 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 14:35:14 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:41:26 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,17 @@ static char	**dup_map(char **map, int height)
 	return (copy);
 }
 
+static void	free_print_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab && tab[i])
+		free(tab[i++]);
+	free(tab);
+	ft_putstr_fd("Player cant reach the exit\n", 2);
+}
+
 int	check_valid_path(t_data *m)
 {
 	int		i;
@@ -95,9 +106,6 @@ int	check_valid_path(t_data *m)
 	while (++j < height)
 		while (++i < width)
 			if (map_copy[j][i] == 'C' || map_copy[j][i] == 'E')
-			{
-				ft_putstr_fd("Player cant reach the exit\n", 2);
-				return (free_tab(map_copy), 0);
-			}
+				return (free_print_tab(map_copy), 0);
 	return (free_tab(map_copy), 1);
 }
