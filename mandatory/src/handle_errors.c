@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 13:33:46 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:32:43 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	check_file(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		perror("Wrong number of arguments");
+		ft_putstr_fd("Wrong number of arguments\n", 2);
 		return (0);
 	}
 	if (!(ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".ber", 4) == 0))
 	{
-		perror("Bad extension for the map");
+		ft_putstr_fd("Bad extension for the map\n", 2);
 		return (0);
 	}
 	return (1);
