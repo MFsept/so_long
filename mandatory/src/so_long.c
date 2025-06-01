@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 02:18:59 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:02:49 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int	main(int ac, char **av)
 	int		fd;
 	t_data	m;
 
-	(void)ac;
-	// if (!check_errors(&m, ac, av))
-	// 	return (0);
+	// (void)ac;
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 	{
@@ -67,7 +65,8 @@ int	main(int ac, char **av)
 	}
 	if (setup_display(&m, fd))
 		return (1);
-	// mlx_string_put
+	if (!check_errors(&m, ac, av))
+		return (0);
 	mlx_loop(m.mlx);
 	destroy_sprites(&m, &m.sprites);
 	close_free_all(m, m.map);

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:03:52 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 02:21:26 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:18:47 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ static t_maplist	*maplist_add(t_maplist **lst, char *line)
 		last->next = node;
 	}
 	return (node);
+}
+
+static void	remove_nl(char *line)
+{
+	size_t	len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
 }
 
 static void	maplist_clear(t_maplist *lst)
@@ -79,6 +88,7 @@ char	**create_map(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
+		remove_nl(line);
 		if (!maplist_add(&lst, line))
 			return (maplist_clear(lst), NULL);
 		size++;

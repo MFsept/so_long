@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:06:01 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 01:49:49 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:15:58 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	width_window(t_data *m)
 {
-	return (ft_strlen(m->map[0]) - 1);
+	return (ft_strlen(m->map[0]));
 }
 
 int	height_window(t_data *m)

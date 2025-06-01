@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:16:11 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 02:16:57 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:13:29 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	check_valid_path(t_data *m)
 	flood_fill(map_copy, m->game.player_y, m->game.player_x);
 	while (++j < height)
 		while (++i < width)
-			if (map_copy[i][j] == 'C' || map_copy[i][j] == 'E')
+			if (map_copy[j][i] == 'C' || map_copy[j][i] == 'E')
 				return (free_tab(map_copy), 0);
 	return (free_tab(map_copy), 1);
 }

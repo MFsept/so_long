@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 02:16:51 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:18:37 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ int	check_errors(t_data *m, int ac, char **av)
 		exit(EXIT_FAILURE);
 	else if (!(check_map(m)))
 		exit(EXIT_FAILURE);
-	else if (!(check_content(m)))
-		exit(EXIT_FAILURE);
+	// else if (!(check_content(m)))
+	// exit(EXIT_FAILURE);
 	else if (!(check_double(m)))
 		exit(EXIT_FAILURE);
 	else if (!(check_wall(m)))
 		exit(EXIT_FAILURE);
 	else if (!(check_valid_path(m)))
 		exit(EXIT_FAILURE);
-	exit(EXIT_SUCCESS);
+	return (1);
 }
 
 int	check_file(int ac, char **av)
@@ -49,16 +49,12 @@ int	check_map(t_data *m)
 	size_t	len;
 	int		i;
 
-	i = 0;
-	// if (!m->map || !m->map[0])
-	// 	return (0);
+	if (!m->map || !m->map[0])
+		return (0);
 	len = ft_strlen(m->map[0]);
+	i = 1;
 	while (m->map[i])
 	{
-		if (!m->map[i])
-			return (0);
-		if (m->map[i][ft_strlen(m->map[i])] != '\n')
-			len -= 1;
 		if (ft_strlen(m->map[i]) != len)
 			return (0);
 		i++;
