@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/so_long",
             "args": [
-                "maps/map.ber",
+                "maps/2players_map.ber",
             ],
             "MIMode": "gdb",
             "cwd": "${workspaceFolder}",

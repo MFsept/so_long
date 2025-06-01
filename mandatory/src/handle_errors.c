@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 12:18:37 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:33:46 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	check_errors(t_data *m, int ac, char **av)
 		exit(EXIT_FAILURE);
 	else if (!(check_map(m)))
 		exit(EXIT_FAILURE);
-	// else if (!(check_content(m)))
-	// exit(EXIT_FAILURE);
+	else if (!(check_content(m)))
+		exit(EXIT_FAILURE);
 	else if (!(check_double(m)))
 		exit(EXIT_FAILURE);
 	else if (!(check_wall(m)))
@@ -56,7 +56,7 @@ int	check_map(t_data *m)
 	while (m->map[i])
 	{
 		if (ft_strlen(m->map[i]) != len)
-			return (0);
+			return (ft_putstr_fd("Not same width of line\n", 2), 0);
 		i++;
 	}
 	return (1);
@@ -82,12 +82,12 @@ int	check_content(t_data *m)
 			else if (m->map[y][x] == 'E')
 				exit++;
 			else if (m->map[y][x] != '0' && m->map[y][x] != '1')
-				return (0);
+				return (ft_putstr_fd("Problem with case type in map\n", 2), 0);
 			x++;
 		}
 	}
 	if (player != 1 || exit < 1 || coll < 1)
-		return (0);
+		return (ft_putstr_fd("Problem with the number of case type\n", 2), 0);
 	return (1);
 }
 
@@ -115,6 +115,6 @@ int	check_double(t_data *m)
 		j++;
 	}
 	if (count_exit != 1 || count_player != 1)
-		return (0);
+		return (ft_putstr_fd("Too many players or exit in the map\n", 2), 0);
 	return (1);
 }
