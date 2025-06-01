@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 18:09:31 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:15:02 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int						check_char(char **tab);
 void					map_draw(char **map, t_data *mlx, t_sprites *sprites,
 							t_game *game);
 void					free_tab(char **tab);
-void					close_free_all(t_data m, char **map);
+void					close_free_all(t_data *m, char **map);
 void					destroy_sprites(t_data *m, t_sprites *sprites);
 void					update_player_draw(t_data *m, int old_x, int old_y);
 

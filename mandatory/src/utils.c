@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:02:41 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 18:27:15 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:15:23 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int	close_window(t_data *m)
 	return (0);
 }
 
-void	close_free_all(t_data m, char **map)
+void	close_free_all(t_data *m, char **map)
 {
-	mlx_destroy_window(m.mlx, m.window);
-	mlx_destroy_display(m.mlx);
-	free(m.mlx);
+	mlx_destroy_window(m->mlx, m->window);
+	mlx_destroy_display(m->mlx);
+	free(m->mlx);
 	free_tab(map);
 }
 
