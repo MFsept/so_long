@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:27:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 18:28:49 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:29:22 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	destroy_sprites(t_data *m, t_sprites *sprites)
 	mlx_destroy_image(m->mlx, sprites->wallwhitetop);
 	mlx_destroy_image(m->mlx, sprites->floorblue);
 	mlx_destroy_image(m->mlx, sprites->floorwhite);
-	// mlx_destroy_image(m->mlx, sprites->cheese);
+	mlx_destroy_image(m->mlx, sprites->cheese);
 	mlx_destroy_image(m->mlx, sprites->exit);
 }
 void    destroy_player(t_data *m, t_sprites *sprites)
