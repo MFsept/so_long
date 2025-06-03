@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:02:41 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:30:36 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:35:28 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	close_window(t_data *m)
 
 void	display_steps(t_data *m)
 {
-    char	*steps_str;
+	char	*steps_str;
 
-    steps_str = ft_itoa(m->game.steps);
-    if (steps_str)
-    {
-        mlx_string_put(m->mlx, m->window, 10, 10, 000000, "Steps:");
-        mlx_string_put(m->mlx, m->window, 70, 10, 000000, steps_str);
-        free(steps_str);
-    }
+	steps_str = ft_itoa(m->game.steps);
+	if (steps_str)
+	{
+		mlx_string_put(m->mlx, m->window, 10, 10, 000000, "Steps:");
+		mlx_string_put(m->mlx, m->window, 70, 10, 000000, steps_str);
+		free(steps_str);
+	}
 }
