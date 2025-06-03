@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 23:16:27 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:36:50 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,17 @@ static void	game_init(t_data *m)
 	m->game.collected = 0;
 }
 
-static int	setup_display(t_data *m, int fd, int ac, char **av)
+static int	setup_display(t_data *m, int fd)
 {
 	m->map = create_map(fd);
 	close(fd);
 	if (!m->map || !check_map(m))
 	{
 		ft_putstr_fd("Problem when creating the map\n", 2);
-		return (free_all(m), 1);
+		free_tab(m->map);
+		exit(EXIT_FAILURE);
 	}
-	if (!check_errors(m, ac, av))
-	{
-		destroy_all(m, &m->sprites);
-		return (free_all(m), 0);
-	}
+	check_errors(m);
 	m->mlx = mlx_init();
 	if (!m->mlx)
 		return (1);
@@ -46,9 +43,7 @@ static int	setup_display(t_data *m, int fd, int ac, char **av)
 		mlx_destroy_display(m->mlx);
 		return (free_all(m), 1);
 	}
-	load_player(m, &m->sprites);
-	load_map(m, &m->sprites);
-	load_utils(m, &m->sprites);
+	load_all(m);
 	game_init(m);
 	map_draw(m->map, m, &m->sprites);
 	mlx_hook(m->window, 17, 0, close_window, m);
@@ -69,7 +64,7 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Can't open the file\n", 2);
 		return (1);
 	}
-	if (setup_display(&m, fd, ac, av))
+	if (setup_display(&m, fd))
 		return (free_all(&m), 1);
 	mlx_loop(m.mlx);
 	destroy_all(&m, &m.sprites);

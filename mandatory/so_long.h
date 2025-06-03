@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 22:35:58 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:36:46 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void					*load_sprite(void *mlx, char *path);
 void					load_player(t_data *m, t_sprites *sprites);
 void					load_map(t_data *m, t_sprites *sprites);
 void					load_utils(t_data *m, t_sprites *sprites);
+void					load_all(t_data *m);
 
 // PLAYER
 void					player_forward(t_data *m);
@@ -146,7 +147,7 @@ void					put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
 void					put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
 
 // ERRORS
-int						check_errors(t_data *m, int ac, char **av);
+int						check_errors(t_data *m);
 int						check_file(int ac, char **av);
 int						check_map(t_data *m);
 int						check_content(t_data *m);

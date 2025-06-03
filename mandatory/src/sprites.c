@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 22:06:20 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:36:41 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,11 @@ void	load_utils(t_data *m, t_sprites *sprites)
 {
 	sprites->cheese = load_sprite(m->mlx, "assets/cheese/cheese.xpm");
 	sprites->exit = load_sprite(m->mlx, "assets/utils/doorleft.xpm");
+}
+
+void	load_all(t_data *m)
+{
+	load_player(m, &m->sprites);
+	load_map(m, &m->sprites);
+	load_utils(m, &m->sprites);
 }

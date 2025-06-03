@@ -6,39 +6,32 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 23:19:15 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:34:37 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	check_errors(t_data *m, int ac, char **av)
+int	check_errors(t_data *m)
 {
-	(void)av;
-	(void)ac;
 	if (!(check_map(m)))
 	{
-		free_all(m);
+		free_tab(m->map);
 		exit(EXIT_FAILURE);
 	}
 	else if (!(check_content(m)))
 	{
-		free_all(m);
+		free_tab(m->map);
 		exit(EXIT_FAILURE);
 	}
 	else if (!(check_double(m)))
 	{
-		free_all(m);
+		free_tab(m->map);
 		exit(EXIT_FAILURE);
 	}
-	else if (!(check_wall(m)))
+	else if (!(check_wall(m)) || !(check_valid_path(m)))
 	{
-		free_all(m);
-		exit(EXIT_FAILURE);
-	}
-	else if (!(check_valid_path(m)))
-	{
-		free_all(m);
+		free_tab(m->map);
 		exit(EXIT_FAILURE);
 	}
 	return (1);
