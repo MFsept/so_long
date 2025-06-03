@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:02:41 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:35:28 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:40:38 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,10 @@ void	display_steps(t_data *m)
 		mlx_string_put(m->mlx, m->window, 70, 10, 000000, steps_str);
 		free(steps_str);
 	}
+}
+
+void	free_all(t_data *m)
+{
+	if (m->map)
+		free_tab(m->map);
 }

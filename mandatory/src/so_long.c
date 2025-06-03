@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:32:02 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:40:45 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static void	game_init(t_data *m)
 	m->game.collected = 0;
 }
 
-void	free_all(t_data *m)
-{
-	if (m->map)
-		free_tab(m->map);
-}
 
 static int	setup_display(t_data *m, int fd)
 {

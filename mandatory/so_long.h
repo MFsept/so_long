@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:27:28 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:42:46 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,6 @@ typedef struct s_data
 int						close_window(t_data *vars);
 int						key_info(int keycode, t_data *m);
 void					free_all(t_data *m);
-void					destroy_player(t_data *m, t_sprites *sprites);
-void					destroy_all(t_data *m, t_sprites *sprites);
-void					destroy_other(t_data *m, t_sprites *sprites);
 void					display_steps(t_data *m);
 
 // MAP INFO
@@ -112,27 +109,22 @@ int						height_window(t_data *m);
 int						x_max(int x);
 int						y_max(int y);
 
-// MAP
-char					**create_map(int file);
+// CREATE MAP
+char					**create_map(int fd);
+char					**maplist_to_tab(t_maplist *lst, int size);
+
+//MAP
 void					map_fill(char **map);
 int						nb_lines(int file);
 int						check_char(char **tab);
 void					map_draw(char **map, t_data *m, t_sprites *sprites);
-void					free_tab(char **tab);
-void					update_player_draw(t_data *m, int old_x, int old_y);
 
 // SPRITES
 void					*load_sprite(void *mlx, char *path);
 void					load_player(t_data *m, t_sprites *sprites);
 void					load_map(t_data *m, t_sprites *sprites);
 void					load_utils(t_data *m, t_sprites *sprites);
-void					put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
-void					put_floor(t_data *mlx, t_sprites *sprites, int x,
-							int y);
-void					put_player(t_data *mlx, t_game *game, int x, int y);
-void					put_collectible(t_data *mlx, t_sprites *sprites, int x,
-							int y);
-void					put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
+
 
 // PLAYER
 void					player_forward(t_data *m);
@@ -141,16 +133,36 @@ void					player_left(t_data *m);
 void					player_right(t_data *m);
 void					find_player_pos(t_data *m);
 
+
+//PUT PLAYER
+void	put_player(t_data *m, t_game *game, int x, int y);
+
+//PUT UTILS
+void	put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
+void	put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
+void	put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
+
+//PUT WALL
+void	put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
+
 // ERRORS
 int						check_errors(t_data *m, int ac, char **av);
 int						check_file(int ac, char **av);
 int						check_map(t_data *m);
 int						check_content(t_data *m);
 int						check_double(t_data *m);
+
+// ERRORS 2
 int						check_wall(t_data *m);
 int						check_valid_path(t_data *m);
 
 // collect
 int						collect(t_data *m);
 int						count_collect(t_data *m);
+
+//DESTROY
+void	destroy_all(t_data *m, t_sprites *sprites);
+void	destroy_player(t_data *m, t_sprites *sprites);
+void	destroy_other(t_data *m, t_sprites *sprites);
+
 #endif
