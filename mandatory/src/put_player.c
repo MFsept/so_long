@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:31:59 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:10:43 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:31:47 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,5 @@ void	put_player(t_data *m, t_game *game, int x, int y)
 		put_right(m, game, x, y);
 	else if (game->player_dir == 3)
 		put_top(m, game, x, y);
+	display_steps(m);
 }

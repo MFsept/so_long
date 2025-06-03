@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:52:14 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:32:02 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	setup_display(t_data *m, int fd)
 	}
 	m->mlx = mlx_init();
 	if (!m->mlx)
-		return (free_all(m), 1);
+		return (1);
 	m->window = mlx_new_window(m->mlx, width_window(m) * TILE, height_window(m)
 			* TILE, "My Game");
 	if (!m->window)

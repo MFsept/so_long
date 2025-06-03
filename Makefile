@@ -31,7 +31,9 @@ SRC = mandatory/src/so_long.c \
       libft/ft_lstclear.c \
       libft/ft_lstdelone.c \
       libft/ft_strchr.c \
-      libft/ft_strncmp.c 
+      libft/ft_strncmp.c \
+      libft/ft_itoa.c \
+      libft/ft_strlcpy.c \
 
 OBJ = $(SRC:.c=.o)
 

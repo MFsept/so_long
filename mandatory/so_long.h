@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:18:35 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:27:28 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void					free_all(t_data *m);
 void					destroy_player(t_data *m, t_sprites *sprites);
 void					destroy_all(t_data *m, t_sprites *sprites);
 void					destroy_other(t_data *m, t_sprites *sprites);
+void					display_steps(t_data *m);
 
 // MAP INFO
 
