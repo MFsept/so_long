@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:02:41 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:40:38 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:49:53 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	key_info(int keycode, t_data *m)
 int	close_window(t_data *m)
 {
 	destroy_all(m, &m->sprites);
+	free_all(m);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -84,4 +85,6 @@ void	free_all(t_data *m)
 {
 	if (m->map)
 		free_tab(m->map);
+	if (m->mlx)
+		free(m->mlx);
 }

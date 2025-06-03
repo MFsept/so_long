@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:42:46 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:35:58 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int						y_max(int y);
 char					**create_map(int fd);
 char					**maplist_to_tab(t_maplist *lst, int size);
 
-//MAP
+// MAP
 void					map_fill(char **map);
 int						nb_lines(int file);
 int						check_char(char **tab);
@@ -125,7 +125,6 @@ void					load_player(t_data *m, t_sprites *sprites);
 void					load_map(t_data *m, t_sprites *sprites);
 void					load_utils(t_data *m, t_sprites *sprites);
 
-
 // PLAYER
 void					player_forward(t_data *m);
 void					player_back(t_data *m);
@@ -133,17 +132,18 @@ void					player_left(t_data *m);
 void					player_right(t_data *m);
 void					find_player_pos(t_data *m);
 
+// PUT PLAYER
+void					put_player(t_data *m, t_game *game, int x, int y);
 
-//PUT PLAYER
-void	put_player(t_data *m, t_game *game, int x, int y);
+// PUT UTILS
+void					put_floor(t_data *mlx, t_sprites *sprites, int x,
+							int y);
+void					put_collectible(t_data *mlx, t_sprites *sprites, int x,
+							int y);
+void					put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
 
-//PUT UTILS
-void	put_floor(t_data *mlx, t_sprites *sprites, int x, int y);
-void	put_collectible(t_data *mlx, t_sprites *sprites, int x, int y);
-void	put_exit(t_data *mlx, t_sprites *sprites, int x, int y);
-
-//PUT WALL
-void	put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
+// PUT WALL
+void					put_wall(t_data *mlx, t_sprites *sprites, int x, int y);
 
 // ERRORS
 int						check_errors(t_data *m, int ac, char **av);
@@ -160,9 +160,9 @@ int						check_valid_path(t_data *m);
 int						collect(t_data *m);
 int						count_collect(t_data *m);
 
-//DESTROY
-void	destroy_all(t_data *m, t_sprites *sprites);
-void	destroy_player(t_data *m, t_sprites *sprites);
-void	destroy_other(t_data *m, t_sprites *sprites);
+// DESTROY
+void					destroy_all(t_data *m, t_sprites *sprites);
+void					destroy_player(t_data *m, t_sprites *sprites);
+void					destroy_other(t_data *m, t_sprites *sprites);
 
 #endif

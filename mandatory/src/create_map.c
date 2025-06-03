@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:03:52 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:12:24 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:26:50 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ char	**maplist_to_tab(t_maplist *lst, int size)
 	int			i;
 	t_maplist	*tmp;
 
-	map = malloc(sizeof(char *) * (size + 1));
 	i = 0;
 	tmp = lst;
+	map = malloc(sizeof(char *) * (size + 1));
 	if (!map)
 		return (NULL);
 	while (tmp)

@@ -39,7 +39,7 @@ OBJ = $(SRC:.c=.o)
 
 MLX_DIR = minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -g3
 
 INC = mandatory/so_long.h \
     libft/libft.h \

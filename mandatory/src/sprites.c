@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:18:28 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:10:51 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:06:20 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	*load_sprite(void *mlx, char *path)
 
 	img = mlx_xpm_file_to_image(mlx, path, &w, &h);
 	if (!img)
+	{
+		free(img);
 		ft_printf("Erreur chargement sprite : %s\n", path);
+	}
 	return (img);
 }
 

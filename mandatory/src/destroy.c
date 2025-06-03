@@ -6,11 +6,17 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:27:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:12:21 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:36:04 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+static void	destroy_barrels(t_data *m, t_sprites *sprites)
+{
+	if (sprites->wallbluebottom)
+		mlx_destroy_image(m->mlx, sprites->barrels);
+}
 
 void	destroy_all(t_data *m, t_sprites *sprites)
 {
@@ -18,6 +24,7 @@ void	destroy_all(t_data *m, t_sprites *sprites)
 	{
 		destroy_player(m, sprites);
 		destroy_other(m, sprites);
+		destroy_barrels(m, sprites);
 	}
 	if (m->window && m->mlx)
 		mlx_destroy_window(m->mlx, m->window);

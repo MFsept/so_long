@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:40:45 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:36:13 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static void	game_init(t_data *m)
 	m->game.collected = 0;
 }
 
-
-static int	setup_display(t_data *m, int fd)
+static int	setup_display(t_data *m, int fd, int ac, char **av)
 {
 	m->map = create_map(fd);
 	close(fd);
@@ -31,6 +30,11 @@ static int	setup_display(t_data *m, int fd)
 	{
 		ft_putstr_fd("Problem when creating the map\n", 2);
 		return (free_all(m), 1);
+	}
+	if (!check_errors(m, ac, av))
+	{
+		destroy_all(m, &m->sprites);
+		return (free_all(m), 0);
 	}
 	m->mlx = mlx_init();
 	if (!m->mlx)
@@ -65,13 +69,8 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Can't open the file\n", 2);
 		return (1);
 	}
-	if (setup_display(&m, fd))
-		return (1);
-	if (!check_errors(&m, ac, av))
-	{
-		destroy_all(&m, &m.sprites);
-		return (free_all(&m), 0);
-	}
+	if (setup_display(&m, fd, ac, av))
+		return (free_all(&m), 1);
 	mlx_loop(m.mlx);
 	destroy_all(&m, &m.sprites);
 	free_all(&m);
