@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 14:12:10 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:19:15 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,33 @@
 
 int	check_errors(t_data *m, int ac, char **av)
 {
-	if (!check_file(ac, av))
+	(void)av;
+	(void)ac;
+	if (!(check_map(m)))
+	{
+		free_all(m);
 		exit(EXIT_FAILURE);
-	else if (!(check_map(m)))
-		exit(EXIT_FAILURE);
+	}
 	else if (!(check_content(m)))
+	{
+		free_all(m);
 		exit(EXIT_FAILURE);
+	}
 	else if (!(check_double(m)))
+	{
+		free_all(m);
 		exit(EXIT_FAILURE);
+	}
 	else if (!(check_wall(m)))
+	{
+		free_all(m);
 		exit(EXIT_FAILURE);
+	}
 	else if (!(check_valid_path(m)))
+	{
+		free_all(m);
 		exit(EXIT_FAILURE);
+	}
 	return (1);
 }
 
