@@ -1,7 +1,5 @@
 NAME = so_long
 
-NAME_BONUS = bonus_so_long
-
 SRC = mandatory/src/so_long.c \
       mandatory/src/map.c \
       mandatory/src/sprites.c \
@@ -37,41 +35,38 @@ SRC = mandatory/src/so_long.c \
 
 OBJ = $(SRC:.c=.o)
 
-SRC_BONUS = bonus/so_long_bonus.c \
-            map_bonus.c \
-            sprites_bonus.c 
-
-OBJ_BONUS = $(SRC_BONUS:.c=.o)
+MLX_DIR = minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-
-MLX_EX = minilibx-linux/libmlx.a
 
 INC = mandatory/so_long.h \
     libft/libft.h \
     libft/printf/ft_printf.h \
-	libft/gnl/get_next_line.h 
+    libft/gnl/get_next_line.h 
 
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Imlx -g
 
-all: $(NAME)
+all: $(MLX) $(NAME)
+
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ) $(MLX_EX) -o $(NAME)
-
-bonus: $(OBJ_BONUS)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ_BONUS) $(MLX_EX) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ) $(MLX) -o $(NAME)
 
 %.o: %.c $(INC)
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)
+	$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)
+	$(MAKE) -C $(MLX_DIR) clean
 
 re: fclean all
 
-.PHONY: clean fclean re all bonus
+.PHONY: clean fclean re all

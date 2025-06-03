@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 10:39:56 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:58:54 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:12:10 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,11 @@ int	check_map(t_data *m)
 
 int	check_content(t_data *m)
 {
-	// static int	y = -1;
-	// int			x;
-	// static int	exit = 0;
-	// static int	coll = 0;
-	// static int	player = 0;
-	int	y = -1;
-    int	x;
-    int	exit = 0;
-    int	coll = 0;
-    int	player = 0;
+	static int	y = -1;
+	int			x;
+	static int	exit = 0;
+	static int	coll = 0;
+	static int	player = 0;
 
 	while (m->map[++y])
 	{
