@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:31:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 14:25:08 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:11:38 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	put_top(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-	if ((x + y) % 2 == 1)
+	if ((x + y) % 2 == 0)
 		mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallbluetop, x
 			* TILE, y * TILE);
 	else
@@ -24,7 +24,7 @@ static void	put_top(t_data *mlx, t_sprites *sprites, int x, int y)
 
 static void	put_bottom(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-	if ((x + y) % 2 == 1)
+	if ((x + y) % 2 == 0)
 		mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallbluebottom,
 			x * TILE, y * TILE);
 	else
@@ -34,7 +34,7 @@ static void	put_bottom(t_data *mlx, t_sprites *sprites, int x, int y)
 
 static void	put_left(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-	if ((x + y) % 2 == 1)
+	if ((x + y) % 2 == 0)
 		mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueleft, x
 			* TILE, y * TILE);
 	else
@@ -44,7 +44,7 @@ static void	put_left(t_data *mlx, t_sprites *sprites, int x, int y)
 
 static void	put_right(t_data *mlx, t_sprites *sprites, int x, int y)
 {
-	if ((x + y) % 2 == 1)
+	if ((x + y) % 2 == 0)
 		mlx_put_image_to_window(mlx->mlx, mlx->window, sprites->wallblueright, x
 			* TILE, y * TILE);
 	else

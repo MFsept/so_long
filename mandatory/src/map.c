@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:24:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/05/31 14:18:52 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:13:57 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	check_char(char **tab)
 	return (1);
 }
 
-void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
+void	map_draw(char **map, t_data *m, t_sprites *sprites)
 {
 	int	x;
 	int	y;
@@ -90,15 +90,15 @@ void	map_draw(char **map, t_data *mlx, t_sprites *sprites, t_game *game)
 		x = 0;
 		while (map[y][x])
 		{
-			put_floor(mlx, sprites, x, y);
+			put_floor(m, sprites, x, y);
 			if (map[y][x] == '1')
-				put_wall(mlx, sprites, x, y);
+				put_wall(m, sprites, x, y);
 			else if (map[y][x] == 'P')
-				put_player(mlx, game, x, y);
+				put_player(m, &m->game, x, y);
 			else if (map[y][x] == 'C')
-				put_collectible(mlx, sprites, x, y);
+				put_collectible(m, sprites, x, y);
 			else if (map[y][x] == 'E')
-				put_exit(mlx, sprites, x, y);
+				put_exit(m, sprites, x, y);
 			x++;
 		}
 		y++;

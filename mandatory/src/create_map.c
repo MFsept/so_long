@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:03:52 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/01 18:13:46 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:46:15 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	**maplist_to_tab(t_maplist *lst, int size)
 	while (tmp)
 	{
 		map[i++] = ft_strdup(tmp->line);
+		if (!map)
+			return (free_tab(map), NULL);
 		tmp = tmp->next;
 	}
 	map[i] = NULL;

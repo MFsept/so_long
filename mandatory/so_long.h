@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:02:34 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 00:35:13 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:18:35 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ typedef struct s_data
 int						close_window(t_data *vars);
 int						key_info(int keycode, t_data *m);
 void					free_all(t_data *m);
+void					destroy_player(t_data *m, t_sprites *sprites);
+void					destroy_all(t_data *m, t_sprites *sprites);
+void					destroy_other(t_data *m, t_sprites *sprites);
 
 // MAP INFO
 
@@ -113,11 +116,8 @@ char					**create_map(int file);
 void					map_fill(char **map);
 int						nb_lines(int file);
 int						check_char(char **tab);
-void					map_draw(char **map, t_data *mlx, t_sprites *sprites,
-							t_game *game);
+void					map_draw(char **map, t_data *m, t_sprites *sprites);
 void					free_tab(char **tab);
-void					close_free_all(t_data *m);
-void					destroy_sprites(t_data *m, t_sprites *sprites);
 void					update_player_draw(t_data *m, int old_x, int old_y);
 
 // SPRITES

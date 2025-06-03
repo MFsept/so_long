@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 00:35:24 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:18:45 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ static void	game_init(t_data *m)
 
 void	free_all(t_data *m)
 {
-	if (m->mlx)
-		free(m->mlx);
 	if (m->map)
 		free_tab(m->map);
 }
+
 static int	setup_display(t_data *m, int fd)
 {
 	m->map = create_map(fd);
@@ -52,7 +51,7 @@ static int	setup_display(t_data *m, int fd)
 	load_map(m, &m->sprites);
 	load_utils(m, &m->sprites);
 	game_init(m);
-	map_draw(m->map, m, &m->sprites, &m->game);
+	map_draw(m->map, m, &m->sprites);
 	mlx_hook(m->window, 17, 0, close_window, m);
 	mlx_hook(m->window, KeyPress, KeyPressMask, key_info, m);
 	return (0);
@@ -74,9 +73,9 @@ int	main(int ac, char **av)
 	if (setup_display(&m, fd))
 		return (1);
 	if (!check_errors(&m, ac, av))
-		return (close_free_all(&m), 0);
+		return (free_all(&m), 0);
 	mlx_loop(m.mlx);
-	destroy_sprites(&m, &m.sprites);
-	close_free_all(&m);
+	destroy_all(&m, &m.sprites);
+	free_all(&m);
 	return (0);
 }
