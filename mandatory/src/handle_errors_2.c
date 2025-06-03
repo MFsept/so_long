@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 15:16:11 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:10:34 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:51:15 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	**dup_map(char **map, int height)
 	{
 		copy[i] = strdup(map[i]);
 		if (!copy[i++])
-			return (NULL);
+			return (free_tab(copy),NULL);
 	}
 	copy[i] = NULL;
 	return (copy);

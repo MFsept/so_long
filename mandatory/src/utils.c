@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:02:41 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:18:18 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:59:19 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	key_info(int keycode, t_data *m)
 
 int	close_window(t_data *m)
 {
-	mlx_destroy_window(m->mlx, m->window);
+	destroy_all(m, &m->sprites);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:03:12 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:18:45 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:52:14 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ int	main(int ac, char **av)
 	if (setup_display(&m, fd))
 		return (1);
 	if (!check_errors(&m, ac, av))
+	{
+		destroy_all(&m, &m.sprites);
 		return (free_all(&m), 0);
+	}
 	mlx_loop(m.mlx);
 	destroy_all(&m, &m.sprites);
 	free_all(&m);

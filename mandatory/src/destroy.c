@@ -6,7 +6,7 @@
 /*   By: mfernand <mfernand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:27:46 by mfernand          #+#    #+#             */
-/*   Updated: 2025/06/03 13:18:56 by mfernand         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:02:13 by mfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	destroy_all(t_data *m, t_sprites *sprites)
 {
+	if (sprites)
+    {
+        destroy_player(m, sprites);
+        destroy_other(m, sprites);
+    }
 	if (m->window && m->mlx)
-		mlx_destroy_window(m->mlx, m->window);
-	if (m->mlx)
-		mlx_destroy_display(m->mlx);
-	destroy_player(m, sprites);
-	destroy_other(m, sprites);
+        mlx_destroy_window(m->mlx, m->window);
+    if (m->mlx)
+        mlx_destroy_display(m->mlx);
 }
 
 void	destroy_player(t_data *m, t_sprites *sprites)
